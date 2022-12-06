@@ -1,3 +1,5 @@
+-- problem url = "https://www.hackerrank.com/challenges/full-score/problem?h_r=profile"
+
 SELECT Ha.hacker_id, Ha.name
 FROM Submissions Sub
     JOIN Hackers Ha ON Sub.hacker_id = Ha.hacker_id
