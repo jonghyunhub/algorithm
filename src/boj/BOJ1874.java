@@ -22,7 +22,7 @@ public class BOJ1874 {
                     answer.append("+\n");
                 }
                 stack.pop();
-                answer.append("+\n");
+                answer.append("-\n");
             } else {
                 //스택에 넣어야하는 숫자(nowStack) 보다 출력해야하는 숫자(nextValue)가 작은경우
                 // => 스택이 비어있거나
