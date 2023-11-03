@@ -1,4 +1,4 @@
-package algo_basic;
+package algo_basic.datastructure;
 
 import java.io.*;
 import java.util.Stack;

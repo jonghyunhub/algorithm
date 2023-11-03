@@ -1,45 +1,45 @@
-package algo_basic;
+package algo_basic.datastructure;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
-public class BOJ10845Plain {
+//Java는 Queue에 back 메소드가 없어서 직접 구현해서 해결해야 함
+public class BOJ10845 {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int[] queue = new int[n];
-        int begin = 0;
-        int end = 0;
-        while (n-- > 0) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        for (int k = 0; k < n; k++) {
             String cmd = sc.next();
             if (cmd.equals("push")) {
                 int num = Integer.parseInt(sc.next());
-                queue[end++] = num;
+                queue.offer(num);
             } else if (cmd.equals("front")) {
-                if (begin == end) {
+                if (queue.isEmpty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(queue[begin]);
+                    System.out.println(queue.peek());
                 }
             } else if (cmd.equals("size")) {
-                System.out.println(end - begin);
+                System.out.println(queue.size());
             } else if (cmd.equals("empty")) {
-                if (begin == end) {
+                if (queue.isEmpty()) {
                     System.out.println("1");
                 } else {
                     System.out.println("0");
                 }
             } else if (cmd.equals("pop")) {
-                if (begin == end) {
+                if (queue.isEmpty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(queue[begin]);
-                    begin += 1;
+                    System.out.println(queue.poll());
                 }
             } else if (cmd.equals("back")) {
-                if (begin == end) {
+                if (queue.isEmpty()) {
                     System.out.println("-1");
                 } else {
-                    System.out.println(queue[end - 1]);
+                    // ??? ?? ??... Queue? ??
                 }
             }
         }
