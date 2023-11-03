@@ -23,9 +23,9 @@ public class BOJ10809 {
         for (int i = 0; i < alphabet.length; i++) {
             if (i == firstData) {
                 bw.write(0 + " ");
-            }else if (alphabet[i] == 0) {
+            } else if (alphabet[i] == 0) {
                 bw.write(-1 + " ");
-            }else {
+            } else {
                 bw.write(alphabet[i] + " ");
             }
         }

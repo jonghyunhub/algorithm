@@ -9,7 +9,7 @@ public class BOJ11022 {
         for (int i = 0; i < t; i++) {
             int a = scanner.nextInt();
             int b = scanner.nextInt();
-            System.out.println("Case #" + (i+1) + ": " + a + " + " + b + " = " + (a+b));
+            System.out.println("Case #" + (i + 1) + ": " + a + " + " + b + " = " + (a + b));
         }
         scanner.close();
     }

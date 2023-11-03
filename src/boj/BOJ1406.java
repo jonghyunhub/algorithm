@@ -62,5 +62,5 @@ public class BOJ1406 {
 
         bufferedReader.close();
     }
-    
+
 }

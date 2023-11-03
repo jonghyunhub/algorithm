@@ -13,7 +13,5 @@ public class BOJ2743 {
         br.close();
 
 
-
-
     }
 }

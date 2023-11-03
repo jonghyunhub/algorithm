@@ -13,9 +13,9 @@ public class BOJ11655 {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
 
-            if(c > 'z' - 13 && c <= 'z'){
-                bw.write((char) ('a' + 12 - ('z' - c) ));
-            }else if (c >= 'a' && c <= 'z' - 13) {
+            if (c > 'z' - 13 && c <= 'z') {
+                bw.write((char) ('a' + 12 - ('z' - c)));
+            } else if (c >= 'a' && c <= 'z' - 13) {
                 bw.write((char) (c + 13));
             } else if (c > 'Z' - 13 && c <= 'Z') {
                 bw.write((char) ('A' + 12 - ('Z' - c)));

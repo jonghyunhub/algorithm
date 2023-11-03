@@ -11,7 +11,7 @@ public class FindFriends {
 //        int[][] relationships = {{1, 2}, {2, 3}, {2, 6}, {3, 4}, {4, 5}};
 //        int target = 1;
 //        int limit = 2;
-        int[][] relationships ={ {1, 2}, {2, 3}, {2, 6}, {3, 4}, {4, 5}};
+        int[][] relationships = {{1, 2}, {2, 3}, {2, 6}, {3, 4}, {4, 5}};
         int target = 2;
         int limit = 3;
 

@@ -31,7 +31,7 @@ public class BOJ1918 {
                 case '+':
                 case '-':
                 case '*':
-                case '/' :
+                case '/':
                     if (operationStack.isEmpty()) {
                         operationStack.push(expression.charAt(i));
                         break;
@@ -57,8 +57,8 @@ public class BOJ1918 {
     }
 
     static int precedence(char ch) {
-        if(ch == '(') return 0;
-        if(ch == '+' || ch == '-') return 1;
+        if (ch == '(') return 0;
+        if (ch == '+' || ch == '-') return 1;
         return 2;
     }
 

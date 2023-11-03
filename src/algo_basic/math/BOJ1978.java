@@ -9,13 +9,14 @@ public class BOJ1978 {
         } else if (x == 2) {
             return true;
         }
-        for (int i=2; i*i <= x; i++) {
+        for (int i = 2; i * i <= x; i++) {
             if (x % i == 0) {
                 return false;
             }
         }
         return true;
     }
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();

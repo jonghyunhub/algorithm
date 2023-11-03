@@ -22,7 +22,7 @@ public class BOJ17298 {
         stack.push(0);
 
         for (int i = 1; i < A.length; i++) {
-            while (!stack.isEmpty()){
+            while (!stack.isEmpty()) {
                 if (A[stack.peek()] < A[i]) { // 오큰수 인 경우 , A의 인덱스 스택에서 꺼내고 오큰수 값을 정답 배열에 넣어줌
                     answer[stack.pop()] = A[i];
                     if (stack.isEmpty()) { //오큰수 비교 끝내고 스택이 비어있으면 현재 인덱스 스택에 넣어줌

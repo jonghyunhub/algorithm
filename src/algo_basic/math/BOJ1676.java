@@ -7,8 +7,8 @@ public class BOJ1676 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int ans = 0;
-        for (int i=5; i<=n; i*=5) {
-            ans += n/i;
+        for (int i = 5; i <= n; i *= 5) {
+            ans += n / i;
         }
         System.out.println(ans);
     }

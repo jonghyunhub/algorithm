@@ -16,7 +16,7 @@ public class BOJ1158 {
         }
         System.out.print("<");
         while (!queue.isEmpty()) {
-            for (int i = 0; i < K-1; i++) {
+            for (int i = 0; i < K - 1; i++) {
                 Integer poll = queue.poll();
                 queue.add(poll);
             }

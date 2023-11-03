@@ -30,13 +30,13 @@ public class BOJ17299 {
 
         for (int i = 1; i < A.length; i++) {
             while (!stack.isEmpty()) {
-                if(feq[A[stack.peek()]] < feq[A[i]]){ //오등큰수 인 경우
+                if (feq[A[stack.peek()]] < feq[A[i]]) { //오등큰수 인 경우
                     answer[stack.pop()] = A[i];
                     if (stack.isEmpty()) { //오등큰수 비교 끝내고 스택이 비어있으면 현재 인덱스 스택에 넣어줌
                         stack.push(i);
                         break;
                     }
-                }else { //오등큰수 아닌 경우
+                } else { //오등큰수 아닌 경우
                     stack.push(i);
                     break;
                 }

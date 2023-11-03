@@ -24,17 +24,17 @@ public class BOJ1935 {
                 // 3번째줄에는 'A'에 해당하는 값, 4번째줄에는 'B'에 해당하는 값 .... 들어옴
                 // 즉, 3번째줄 입력받은 값 => operand[0] / 4번째줄 입력받은 값 => operand[1] / ...
                 // expression.charAt(i) -'A' => 'A'가 입력되면 => 0 'B'가 입력되면 =>1
-                operandStack.push(operands[(int)expression.charAt(i)-'A']);
+                operandStack.push(operands[(int) expression.charAt(i) - 'A']);
             } else if (expression.charAt(i) == '+') {
                 // 먼저 들어간 것이 연산의 왼쪽으로 와야함
                 Double second = operandStack.pop();
                 Double first = operandStack.pop();
                 operandStack.push(first + second);
-            }else if(expression.charAt(i) == '-'){
+            } else if (expression.charAt(i) == '-') {
                 Double second = operandStack.pop();
                 Double first = operandStack.pop();
                 operandStack.push(first - second);
-            }else if (expression.charAt(i) == '*') {
+            } else if (expression.charAt(i) == '*') {
                 Double second = operandStack.pop();
                 Double first = operandStack.pop();
                 operandStack.push(first * second);

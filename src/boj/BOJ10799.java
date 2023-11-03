@@ -14,7 +14,7 @@ public class BOJ10799 {
             char c = input.charAt(i);
             if (c == '(') {
                 stack.push(i);
-            } else if(c == ')'){
+            } else if (c == ')') {
                 //레이저인 경우 잘린 쇠막대기 갯수 세기
                 if (stack.peek() == i - 1) {
                     stack.pop();

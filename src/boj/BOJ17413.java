@@ -30,7 +30,7 @@ public class BOJ17413 {
                 continue;
             }
 
-            if (sentence.charAt(i) == ' ' || sentence.charAt(i) == '\n' ) {
+            if (sentence.charAt(i) == ' ' || sentence.charAt(i) == '\n') {
                 while (!stack.isEmpty()) {
                     bw.write(stack.pop());
                 }

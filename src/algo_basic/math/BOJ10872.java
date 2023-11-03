@@ -7,7 +7,7 @@ public class BOJ10872 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int ans = 1;
-        for (int i=2; i<=n; i++) {
+        for (int i = 2; i <= n; i++) {
             ans *= i;
         }
         System.out.println(ans);
