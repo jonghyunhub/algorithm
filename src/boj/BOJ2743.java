@@ -11,5 +11,9 @@ public class BOJ2743 {
         String s = br.readLine();
         System.out.println(s.length());
         br.close();
+
+
+
+
     }
 }
