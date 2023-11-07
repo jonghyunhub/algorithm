@@ -5,10 +5,12 @@ import java.util.Scanner;
 
 class Meeting implements Comparable<Meeting> {
     int start, end;
+
     Meeting(int start, int end) {
         this.start = start;
         this.end = end;
     }
+
     public int compareTo(Meeting that) {
         if (this.end < that.end) {
             return -1;
@@ -25,12 +27,13 @@ class Meeting implements Comparable<Meeting> {
         }
     }
 }
+
 public class BOJ1931 {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         Meeting[] a = new Meeting[n];
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             int start = sc.nextInt();
             int end = sc.nextInt();
             a[i] = new Meeting(start, end);
@@ -38,7 +41,7 @@ public class BOJ1931 {
         Arrays.sort(a);
         int last = -1;
         int ans = 0;
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             if (last <= a[i].start) {
                 last = a[i].end;
                 ans += 1;

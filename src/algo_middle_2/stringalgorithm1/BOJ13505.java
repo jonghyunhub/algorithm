@@ -4,31 +4,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class TrieB {
-    class Node {
-        int[] children;
-        boolean valid;
-
-        Node() {
-            children = new int[2];
-            for (int i = 0; i < 2; i++) {
-                children[i] = -1;
-            }
-            valid = false;
-        }
-    }
+    ArrayList<Node> trie = new ArrayList<>();
 
     ;
-    ArrayList<Node> trie = new ArrayList<>();
     int root;
+
+    TrieB() {
+        root = init();
+    }
 
     int init() {
         Node x = new Node();
         trie.add(x);
         return (int) trie.size() - 1;
-    }
-
-    TrieB() {
-        root = init();
     }
 
     void add(int node, int num, int bit) {
@@ -65,6 +53,19 @@ class TrieB {
 
     int query(int num) {
         return query(root, num, 31);
+    }
+
+    class Node {
+        int[] children;
+        boolean valid;
+
+        Node() {
+            children = new int[2];
+            for (int i = 0; i < 2; i++) {
+                children[i] = -1;
+            }
+            valid = false;
+        }
     }
 }
 

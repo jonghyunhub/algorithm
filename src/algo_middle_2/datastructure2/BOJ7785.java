@@ -20,7 +20,7 @@ public class BOJ7785 {
         }
         String[] a = s.toArray(new String[s.size()]);
         Arrays.sort(a);
-        for (int i=a.length-1; i>=0; i--) {
+        for (int i = a.length - 1; i >= 0; i--) {
             System.out.println(a[i]);
         }
     }

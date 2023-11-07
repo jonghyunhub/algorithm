@@ -15,23 +15,24 @@ public class BOJ11724 {
             }
         }
     }
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
-        ArrayList<Integer>[] a = (ArrayList<Integer>[]) new ArrayList[n+1];
-        for (int i=1; i<=n; i++) {
+        ArrayList<Integer>[] a = (ArrayList<Integer>[]) new ArrayList[n + 1];
+        for (int i = 1; i <= n; i++) {
             a[i] = new ArrayList<Integer>();
         }
-        for (int i=0; i<m; i++) {
+        for (int i = 0; i < m; i++) {
             int u = sc.nextInt();
             int v = sc.nextInt();
             a[u].add(v);
             a[v].add(u);
         }
-        boolean[] check = new boolean[n+1];
+        boolean[] check = new boolean[n + 1];
         int ans = 0;
-        for (int i=1; i<=n; i++) {
+        for (int i = 1; i <= n; i++) {
             if (check[i] == false) {
                 dfs(a, check, i);
                 ans += 1;

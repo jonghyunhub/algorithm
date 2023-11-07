@@ -5,11 +5,11 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class BOJ17086 {
+    final static int[] dx = {0, 0, 1, -1, 1, 1, -1, -1};
+    final static int[] dy = {1, -1, 0, 0, 1, -1, 1, -1};
     static int[][] a;
     static int[][] d;
     static int n, m;
-    final static int[] dx = {0, 0, 1, -1, 1, 1, -1, -1};
-    final static int[] dy = {1, -1, 0, 0, 1, -1, 1, -1};
 
     static int go(int sx, int sy) {
         for (int i = 0; i < n; i++) {

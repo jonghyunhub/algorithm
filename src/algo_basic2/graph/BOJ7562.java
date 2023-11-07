@@ -6,8 +6,9 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class BOJ7562 {
-    static final int[] dx = {-2,-1,1,2,2,1,-1,-2};
-    static final int[] dy = {1,2,2,1,-1,-2,-2,-1};
+    static final int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+    static final int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
@@ -18,22 +19,24 @@ public class BOJ7562 {
             int ex = sc.nextInt();
             int ey = sc.nextInt();
             int[][] d = new int[n][n];
-            for (int i=0; i<n; i++) {
-                Arrays.fill(d[i],-1);
+            for (int i = 0; i < n; i++) {
+                Arrays.fill(d[i], -1);
             }
             Queue<Integer> q = new LinkedList<>();
-            q.add(sx); q.add(sy);
+            q.add(sx);
+            q.add(sy);
             d[sx][sy] = 0;
             while (!q.isEmpty()) {
                 int x = q.remove();
                 int y = q.remove();
-                for (int k=0; k<8; k++) {
-                    int nx = x+dx[k];
-                    int ny = y+dy[k];
+                for (int k = 0; k < 8; k++) {
+                    int nx = x + dx[k];
+                    int ny = y + dy[k];
                     if (0 <= nx && nx < n && 0 <= ny && ny < n) {
                         if (d[nx][ny] == -1) {
                             d[nx][ny] = d[x][y] + 1;
-                            q.add(nx); q.add(ny);
+                            q.add(nx);
+                            q.add(ny);
                         }
                     }
                 }

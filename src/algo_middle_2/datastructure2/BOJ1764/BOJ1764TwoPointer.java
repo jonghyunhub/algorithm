@@ -12,16 +12,16 @@ public class BOJ1764TwoPointer {
         int m = sc.nextInt();
         String[] a = new String[n];
         String[] b = new String[m];
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             a[i] = sc.next();
         }
-        for (int i=0; i<m; i++) {
+        for (int i = 0; i < m; i++) {
             b[i] = sc.next();
         }
         Arrays.sort(a);
         Arrays.sort(b);
         ArrayList<String> ans = new ArrayList<>();
-        for (int i=0, j=0; i<a.length && j<b.length;) {
+        for (int i = 0, j = 0; i < a.length && j < b.length; ) {
             if (a[i].compareTo(b[j]) < 0) {
                 i++;
             } else if (a[i].compareTo(b[j]) > 0) {

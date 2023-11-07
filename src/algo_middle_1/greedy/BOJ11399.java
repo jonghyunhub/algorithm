@@ -8,13 +8,13 @@ public class BOJ11399 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[] a = new int[n];
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
         int sum = 0;
         int ans = 0;
         Arrays.sort(a);
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             sum += a[i];
             ans += sum;
         }

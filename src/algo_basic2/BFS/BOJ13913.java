@@ -6,12 +6,14 @@ import java.util.Scanner;
 
 public class BOJ13913 {
     public static final int MAX = 1000000;
+
     static void print(int[] from, int n, int m) {
         if (n != m) {
             print(from, n, from[m]);
         }
         System.out.print(m + " ");
     }
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -25,28 +27,28 @@ public class BOJ13913 {
         q.add(n);
         while (!q.isEmpty()) {
             int now = q.remove();
-            if (now-1 >= 0) {
-                if (check[now-1] == false) {
-                    q.add(now-1);
-                    check[now-1] = true;
-                    dist[now-1] = dist[now] + 1;
-                    from[now-1] = now;
+            if (now - 1 >= 0) {
+                if (check[now - 1] == false) {
+                    q.add(now - 1);
+                    check[now - 1] = true;
+                    dist[now - 1] = dist[now] + 1;
+                    from[now - 1] = now;
                 }
             }
-            if (now+1 < MAX) {
-                if (check[now+1] == false) {
-                    q.add(now+1);
-                    check[now+1] = true;
-                    dist[now+1] = dist[now] + 1;
-                    from[now+1] = now;
+            if (now + 1 < MAX) {
+                if (check[now + 1] == false) {
+                    q.add(now + 1);
+                    check[now + 1] = true;
+                    dist[now + 1] = dist[now] + 1;
+                    from[now + 1] = now;
                 }
             }
-            if (now*2 < MAX) {
-                if (check[now*2] == false) {
-                    q.add(now*2);
-                    check[now*2] = true;
-                    dist[now*2] = dist[now] + 1;
-                    from[now*2] = now;
+            if (now * 2 < MAX) {
+                if (check[now * 2] == false) {
+                    q.add(now * 2);
+                    check[now * 2] = true;
+                    dist[now * 2] = dist[now] + 1;
+                    from[now * 2] = now;
                 }
             }
         }

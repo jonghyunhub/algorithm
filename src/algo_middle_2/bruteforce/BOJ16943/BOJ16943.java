@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class BOJ16943 {
     static boolean next_permutation(char[] a) {
-        int i = a.length-1;
-        while (i > 0 && a[i-1] >= a[i]) {
+        int i = a.length - 1;
+        while (i > 0 && a[i - 1] >= a[i]) {
             i -= 1;
         }
 
@@ -14,16 +14,16 @@ public class BOJ16943 {
             return false;
         }
 
-        int j = a.length-1;
-        while (a[j] <= a[i-1]) {
+        int j = a.length - 1;
+        while (a[j] <= a[i - 1]) {
             j -= 1;
         }
 
-        char temp = a[i-1];
-        a[i-1] = a[j];
+        char temp = a[i - 1];
+        a[i - 1] = a[j];
         a[j] = temp;
 
-        j = a.length-1;
+        j = a.length - 1;
         while (i < j) {
             temp = a[i];
             a[i] = a[j];
@@ -33,6 +33,7 @@ public class BOJ16943 {
         }
         return true;
     }
+
     static int stoi(char[] a) {
         int ans = 0;
         for (char ch : a) {
@@ -40,6 +41,7 @@ public class BOJ16943 {
         }
         return ans;
     }
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         char[] a = sc.next().toCharArray();

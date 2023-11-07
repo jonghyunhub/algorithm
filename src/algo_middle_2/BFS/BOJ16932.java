@@ -6,13 +6,13 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class BOJ16932 {
+    final static int[] dx = {0, 0, 1, -1};
+    final static int[] dy = {1, -1, 0, 0};
     static int n, m;
     static int[][] a;
     static int[][] group;
     static int[] group_size;
     static int groupn;
-    final static int[] dx = {0, 0, 1, -1};
-    final static int[] dy = {1, -1, 0, 0};
 
     static void bfs(int sx, int sy) {
         groupn += 1;

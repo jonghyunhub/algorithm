@@ -3,9 +3,9 @@ package algo_middle_2.bruteforce;
 import java.util.Scanner;
 
 public class BOJ9944 {
-    static char[][] a;
     static final int[] dx = {0, 0, 1, -1};
     static final int[] dy = {1, -1, 0, 0};
+    static char[][] a;
     static int n, m;
 
     static boolean ok(int x, int y) {

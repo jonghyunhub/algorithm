@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 class PairA {
     int x, y;
+
     PairA(int x, int y) {
         this.x = x;
         this.y = y;
@@ -13,9 +14,9 @@ class PairA {
 }
 
 public class BOJ3055 {
-    int x, y;
     public static int[] dx = {1, -1, 0, 0};
     public static int[] dy = {0, 0, 1, -1};
+    int x, y;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

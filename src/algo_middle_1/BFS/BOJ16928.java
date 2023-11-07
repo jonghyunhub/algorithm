@@ -11,11 +11,11 @@ public class BOJ16928 {
         int[] next = new int[101];
         int n = sc.nextInt();
         int m = sc.nextInt();
-        for (int i=1; i<=100; i++) {
+        for (int i = 1; i <= 100; i++) {
             next[i] = i;
             dist[i] = -1;
         }
-        for (int k=0; k<n+m; k++) {
+        for (int k = 0; k < n + m; k++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
             next[x] = y;
@@ -25,8 +25,8 @@ public class BOJ16928 {
         q.add(1);
         while (!q.isEmpty()) {
             int x = q.remove();
-            for (int i=1; i<=6; i++) {
-                int y = x+i;
+            for (int i = 1; i <= 6; i++) {
+                int y = x + i;
                 if (y > 100) continue;
                 y = next[y];
                 if (dist[y] == -1) {

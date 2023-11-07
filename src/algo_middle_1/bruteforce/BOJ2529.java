@@ -1,6 +1,7 @@
 package algo_middle_1.bruteforce;
 
 import java.util.Scanner;
+
 public class BOJ2529 {
     static boolean prev_permutation(int[] a) {
         int i = a.length - 1;

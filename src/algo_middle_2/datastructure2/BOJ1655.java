@@ -5,12 +5,6 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class BOJ1655 {
-    static class Compare implements Comparator<Integer> {
-        public int compare(Integer one, Integer two) {
-            return two.compareTo(one);
-        }
-    }
-
     public static void main(String args[]) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -45,5 +39,11 @@ public class BOJ1655 {
             bw.write(l.peek() + "\n");
         }
         bw.flush();
+    }
+
+    static class Compare implements Comparator<Integer> {
+        public int compare(Integer one, Integer two) {
+            return two.compareTo(one);
+        }
     }
 }

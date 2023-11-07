@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class BOJ13549Deck {
     public static final int MAX = 1000000;
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -17,11 +18,11 @@ public class BOJ13549Deck {
         q.add(n);
         while (!q.isEmpty()) {
             int now = q.poll();
-            for (int next : new int[]{now*2, now-1, now+1}) {
+            for (int next : new int[]{now * 2, now - 1, now + 1}) {
                 if (next >= 0 && next < MAX) {
                     if (c[next] == false) {
                         c[next] = true;
-                        if (next == now*2) {
+                        if (next == now * 2) {
                             q.addFirst(next);
                             d[next] = d[now];
                         } else {

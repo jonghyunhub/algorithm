@@ -13,10 +13,10 @@ class PairE {
 
 public class BOJ17141 {
 
-    static int[][] a;
-    static int[][] d;
     static final int[] dx = {0, 0, 1, -1};
     static final int[] dy = {1, -1, 0, 0};
+    static int[][] a;
+    static int[][] d;
     static int n, m;
     static ArrayList<PairE> candi = new ArrayList<>();
     static int ans = -1;

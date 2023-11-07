@@ -8,14 +8,14 @@ public class BOJ10422B {
         long[][] d = new long[5001][5001];
         long mod = 1000000007L;
         d[0][0] = 1;
-        for (int i=1; i<=5000; i++) {
-            for (int j=0; j<=i; j++) {
+        for (int i = 1; i <= 5000; i++) {
+            for (int j = 0; j <= i; j++) {
                 d[i][j] = 0;
-                if (j+1 <= i) {
-                    d[i][j] += d[i-1][j+1];
+                if (j + 1 <= i) {
+                    d[i][j] += d[i - 1][j + 1];
                 }
-                if (j-1 >= 0) {
-                    d[i][j] += d[i-1][j-1];
+                if (j - 1 >= 0) {
+                    d[i][j] += d[i - 1][j - 1];
                 }
                 d[i][j] %= mod;
             }

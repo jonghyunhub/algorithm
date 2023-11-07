@@ -22,36 +22,36 @@ public class BOJ9019 {
             q.add(n);
             while (!q.isEmpty()) {
                 int now = q.remove();
-                int next = (now*2) % 10000;
+                int next = (now * 2) % 10000;
                 if (check[next] == false) {
                     q.add(next);
                     check[next] = true;
-                    dist[next] = dist[now]+1;
+                    dist[next] = dist[now] + 1;
                     from[next] = now;
                     how[next] = 'D';
                 }
-                next = now-1;
+                next = now - 1;
                 if (next == -1) next = 9999;
                 if (check[next] == false) {
                     q.add(next);
                     check[next] = true;
-                    dist[next] = dist[now]+1;
+                    dist[next] = dist[now] + 1;
                     from[next] = now;
                     how[next] = 'S';
                 }
-                next = (now%1000)*10 + now/1000;
+                next = (now % 1000) * 10 + now / 1000;
                 if (check[next] == false) {
                     q.add(next);
                     check[next] = true;
-                    dist[next] = dist[now]+1;
+                    dist[next] = dist[now] + 1;
                     from[next] = now;
                     how[next] = 'L';
                 }
-                next = (now/10) + (now%10)*1000;
+                next = (now / 10) + (now % 10) * 1000;
                 if (check[next] == false) {
                     q.add(next);
                     check[next] = true;
-                    dist[next] = dist[now]+1;
+                    dist[next] = dist[now] + 1;
                     from[next] = now;
                     how[next] = 'R';
                 }

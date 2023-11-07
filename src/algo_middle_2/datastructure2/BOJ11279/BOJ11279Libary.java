@@ -5,11 +5,6 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class BOJ11279Libary {
-    static class Compare implements Comparator<Integer> {
-        public int compare(Integer one, Integer two) {
-            return two.compareTo(one);
-        }
-    }
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         Compare cmp = new Compare();
@@ -26,6 +21,12 @@ public class BOJ11279Libary {
             } else {
                 q.offer(x);
             }
+        }
+    }
+
+    static class Compare implements Comparator<Integer> {
+        public int compare(Integer one, Integer two) {
+            return two.compareTo(one);
         }
     }
 }

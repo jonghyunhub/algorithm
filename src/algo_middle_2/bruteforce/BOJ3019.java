@@ -5,26 +5,28 @@ import java.util.Scanner;
 public class BOJ3019 {
     static int[] a;
     static int n, m;
+
     static int calc(int i, String s) {
         if (i + s.length() > n) return 0;
         int base = a[i] - (s.charAt(0) - '0');
-        for (int j=0; j<s.length(); j++) {
-            if (base != a[i+j] - (s.charAt(j) - '0')) {
+        for (int j = 0; j < s.length(); j++) {
+            if (base != a[i + j] - (s.charAt(j) - '0')) {
                 return 0;
             }
         }
         return 1;
     }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         n = sc.nextInt();
         m = sc.nextInt();
         a = new int[n];
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             a[i] = sc.nextInt();
         }
         int ans = 0;
-        for (int i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             if (m == 1) {
                 ans += calc(i, "0") + calc(i, "0000");
             } else if (m == 2) {
