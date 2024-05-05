@@ -5,11 +5,11 @@ import java.util.Objects;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Pair implements Comparable<Pair> {
+class PairZ implements Comparable<PairZ> {
     int dist;
     int change;
 
-    Pair(int dist, int change) {
+    PairZ(int dist, int change) {
         this.dist = dist;
         this.change = change;
     }
@@ -21,8 +21,8 @@ class Pair implements Comparable<Pair> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Pair) {
-            Pair that = (Pair) obj;
+        if (obj instanceof PairZ) {
+            PairZ that = (PairZ) obj;
             if (this.dist == that.dist && this.change == that.change) {
                 return true;
             } else {
@@ -33,7 +33,7 @@ class Pair implements Comparable<Pair> {
         }
     }
 
-    public int compareTo(Pair that) {
+    public int compareTo(PairZ that) {
         if (this.dist < that.dist) {
             return -1;
         } else if (this.dist == that.dist) {
@@ -58,12 +58,12 @@ public class BOJ16952 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        Pair[][][][] d = new Pair[n][n][n * n][3];
+        PairZ[][][][] d = new PairZ[n][n][n * n][3];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 for (int k = 0; k < n * n; k++) {
                     for (int l = 0; l < 3; l++) {
-                        d[i][j][k][l] = new Pair(-1, -1);
+                        d[i][j][k][l] = new PairZ(-1, -1);
                     }
                 }
             }
@@ -75,7 +75,7 @@ public class BOJ16952 {
                 a[i][j] = sc.nextInt() - 1;
                 if (a[i][j] == 0) {
                     for (int k = 0; k < 3; k++) {
-                        d[i][j][0][k] = new Pair(0, 0);
+                        d[i][j][0][k] = new PairZ(0, 0);
                         q.add(i);
                         q.add(j);
                         q.add(0);
@@ -84,13 +84,13 @@ public class BOJ16952 {
                 }
             }
         }
-        Pair ans = new Pair(-1, -1);
+        PairZ ans = new PairZ(-1, -1);
         while (!q.isEmpty()) {
             int x = q.remove();
             int y = q.remove();
             int num = q.remove();
             int piece = q.remove();
-            Pair p = d[x][y][num][piece];
+            PairZ p = d[x][y][num][piece];
             if (num == n * n - 1) {
                 if (ans.dist == -1 || ans.compareTo(p) > 0) {
                     ans = p;
@@ -98,7 +98,7 @@ public class BOJ16952 {
             }
             for (int i = 0; i < 3; i++) {
                 if (piece == i) continue;
-                Pair np = new Pair(p.dist + 1, p.change + 1);
+                PairZ np = new PairZ(p.dist + 1, p.change + 1);
                 if (d[x][y][num][i].dist == -1 || d[x][y][num][i].compareTo(np) > 0) {
                     d[x][y][num][i] = np;
                     q.add(x);
@@ -116,7 +116,7 @@ public class BOJ16952 {
                         if (a[nx][ny] == num + 1) {
                             next_num = num + 1;
                         }
-                        Pair np = new Pair(p.dist + 1, p.change);
+                        PairZ np = new PairZ(p.dist + 1, p.change);
                         if (d[nx][ny][next_num][piece].dist == -1 || d[nx][ny][next_num][piece].compareTo(np) > 0) {
                             d[nx][ny][next_num][piece] = np;
                             q.add(nx);
@@ -136,7 +136,7 @@ public class BOJ16952 {
                             if (a[nx][ny] == num + 1) {
                                 next_num = num + 1;
                             }
-                            Pair np = new Pair(p.dist + 1, p.change);
+                            PairZ np = new PairZ(p.dist + 1, p.change);
                             if (d[nx][ny][next_num][piece].dist == -1 || d[nx][ny][next_num][piece].compareTo(np) > 0) {
                                 d[nx][ny][next_num][piece] = np;
                                 q.add(nx);
@@ -159,7 +159,7 @@ public class BOJ16952 {
                             if (a[nx][ny] == num + 1) {
                                 next_num = num + 1;
                             }
-                            Pair np = new Pair(p.dist + 1, p.change);
+                            PairZ np = new PairZ(p.dist + 1, p.change);
                             if (d[nx][ny][next_num][piece].dist == -1 || d[nx][ny][next_num][piece].compareTo(np) > 0) {
                                 d[nx][ny][next_num][piece] = np;
                                 q.add(nx);

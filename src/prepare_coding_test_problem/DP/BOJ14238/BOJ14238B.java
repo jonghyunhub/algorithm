@@ -1,5 +1,6 @@
 package prepare_coding_test_problem.DP.BOJ14238;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOJ14238B {
