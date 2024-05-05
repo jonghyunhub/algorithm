@@ -1,8 +1,6 @@
 package programmers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class AddTwoIndexFromArr {
 
@@ -19,12 +17,27 @@ public class AddTwoIndexFromArr {
     public int[] solution(int[] numbers) {
         List<Integer> array = new ArrayList<>();
         for(int i=0; i<numbers.length; i++){
-            for (int j = 0; j < numbers.length; j++) {
+            for (int j = i+1; j < numbers.length; j++) {
                 if(i != j){
                     array.add(numbers[i] + numbers[j]);
                 }
             }
         }
         return array.stream().distinct().sorted().mapToInt(Integer::new).toArray();
+    }
+
+    /**
+     * set 사용한 풀이
+     */
+    public int[] solution2(int[] numbers) {
+        Set<Integer> set = new HashSet<>();
+        for(int i=0; i<numbers.length; i++){
+            for(int j = i +1; j<numbers.length; j++){
+                if(i!=j){
+                    set.add(numbers[i] + numbers[j]);
+                }
+            }
+        }
+        return set.stream().sorted().mapToInt(Integer::new).toArray();
     }
 }
