@@ -39,7 +39,8 @@ public class MockExam {
         entries.add(Map.entry("2", countSupo2));
         entries.add(Map.entry("3", countSupo3));
 
-        Collections.sort(entries, (e1, e2) -> e2.getValue().compareTo(e1.getValue()));
+        //sorted 메서드 이후에 filter를 사용하면 값이 달라짐, stream은 커밋될때까지 원본 데이터를 유지하기 때문
+        entries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
         return entries.stream()
                 .filter(entry -> entry.getValue() >= entries.get(0).getValue())
