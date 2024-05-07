@@ -10,7 +10,7 @@ public class FailureRate {
 
     public static void main(String[] args) {
         FailureRate failureRate = new FailureRate();
-        int[] stage1 = {2, 1, 2, 6, 2, 4, 3, 3};
+        int[] stage1 = {4,4,4,4,4};
         int[] solution = failureRate.solution(5, stage1);
         System.out.println(Arrays.toString(solution));
     }
@@ -30,11 +30,16 @@ public class FailureRate {
         for (int numOfStage = 1; numOfStage <= N; numOfStage++) {
             int countOfNowStageTop = 0;
             int countOfNowStage = 0;
-            for (int j = 0; j < stages.length; j++) {
-                if (stages[j] == numOfStage)
+            for (int stage : stages) {
+                if (stage == numOfStage)
                     countOfNowStageTop++;
-                if (stages[j] >= numOfStage)
+                if (stage >= numOfStage)
                     countOfNowStage++;
+            }
+            // 스테이지에 도달한 유저가 없는 경우
+            if(countOfNowStage == 0){
+                answer.add(Map.entry(numOfStage, 0.0));
+                continue;
             }
             Double failureRate = (double) countOfNowStageTop / countOfNowStage;
             answer.add(Map.entry(numOfStage, failureRate));
