@@ -1,8 +1,7 @@
-package programmers;
+package programmers.array;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.stream.Stream;
 
 public class ArraySort {
 
