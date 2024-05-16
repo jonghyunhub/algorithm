@@ -9,7 +9,7 @@ public class PairOff {
         String input = s;
         while (!input.isEmpty()) {
             String nextString = proceedPairOff(s);
-            if (input.equals(nextString))
+            if (input.equals(nextString)) // 짝지어 제거하기 했으나 변화가 없으면 실패했으므로 0 리턴
                 return 0;
             input = nextString;
         }
