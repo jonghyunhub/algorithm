@@ -15,17 +15,31 @@ public class StockPrice {
     }
 
     public int[] solution(int[] prices) {
-        final List<Integer> answer = new ArrayList<>();
-        for (int i = 0; i < prices.length; i++) {
-            int count = 0;
-            for (int j = i + 1; j < prices.length; j++) {
-                count++;
-                if (prices[i] > prices[j]) {
-                    break;
-                }
+        final List<Integer> answers = new ArrayList<>();
+        for(int i=0; i<prices.length; i++){
+            Integer time = 0;
+            for(int l=i+1; l<prices.length; l++){
+                time ++;
+                if(prices[i] > prices[l]) break;
             }
-            answer.add(count);
+            answers.add(time);
         }
+
+        return answers.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    /**
+     *
+     *
+     * @param prices
+     * @return
+     */
+    public int[] solution2(int[] prices) {
+        final List<Integer> answer = new ArrayList<>();
+
+
+
+
         return answer.stream().mapToInt(Integer::intValue).toArray();
     }
 }
