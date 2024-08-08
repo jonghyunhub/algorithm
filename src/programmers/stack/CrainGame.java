@@ -24,6 +24,7 @@ public class CrainGame {
         return proceedGame(moves, toyContainers, basket);
     }
 
+    // 1. board 배열을 토대로 각 열에 해당하는 인형들을 Stack에 담는다.
     private Stack<Integer>[] initToyContainers(int[][] board) {
         final Stack<Integer>[] toyContainers = new Stack[board.length];
         for (int i = 0; i < board.length; i++) {
@@ -38,17 +39,20 @@ public class CrainGame {
         return toyContainers;
     }
 
+    // 2. moves 배열을 토대로 게임을 진행한다.
     private int proceedGame(int[] moves, Stack<Integer>[] toyContainers, Stack<Integer> basket) {
         int answer = 0;
         for (int move : moves) {
             if (toyContainers[move - 1].isEmpty()) continue;
             Integer toyNumber = toyContainers[move - 1].pop();
+
             if (!basket.isEmpty() && toyNumber.equals(basket.peek())) {
                 basket.pop();
                 answer += 2;
-            } else {
-                basket.push(toyNumber);
+                continue;
             }
+
+            basket.push(toyNumber);
         }
         return answer;
     }
