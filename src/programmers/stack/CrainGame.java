@@ -14,8 +14,16 @@ public class CrainGame {
                 {4, 2, 4, 4, 2},
                 {3, 5, 1, 3, 1}
         };
+
+        final int[][] board1 = {
+                {1,1,1,1,1},
+                {1,1,1,1,1},
+                {1,1,1,1,1},
+                {1,1,1,1,1},
+                {1,1,1,1,1}
+        };
         final int[] moves = {1, 5, 3, 5, 1, 2, 1, 4};
-        System.out.println(crainGame.solution(board, moves));
+        System.out.println(crainGame.solution(board1, moves));
     }
 
     public int solution(int[][] board, int[] moves) {
@@ -32,10 +40,11 @@ public class CrainGame {
         }
 
         for (int i = 0; i < board.length; i++) {
-            for (int j = board.length - 1; j > 0; j--) {
+            for (int j = board.length - 1; j >= 0; j--) {
                 if (board[j][i] != 0) toyContainers[i].push(board[j][i]);
             }
         }
+
         return toyContainers;
     }
 
