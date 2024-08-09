@@ -10,8 +10,9 @@ public class ModifyTable {
         final ModifyTable modifyTable = new ModifyTable();
         final int n = 8;
         final int k = 2;
-        final String[] cmd = {"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z"};
-        System.out.println(modifyTable.solution(n, k, cmd));
+        final String[] cmd1 = {"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z"};
+        final String[] cmd2 ={"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z", "U 1", "C"};
+        System.out.println(modifyTable.solution(n, k, cmd2));
     }
 
     public String solution(int n, int k, String[] cmd) {
@@ -123,7 +124,10 @@ public class ModifyTable {
 
     /**
      * 1. deletedRows에서 pop한 인덱스의 값을 'O'로 변경
-     * 2. cursor의 값은 변경없음
+     * 2. cursor가 가리키는 값는 변경이 없어야 한다.
+     * 3. cursor는 변경될 수 있음
+     * 3-1. cursor가 가리키는 값이 삭제된 값보다 크거나 같으면 cursor + 1
+     * 3-2. cursor가 가리키는 값이 삭제된 값보다 작으면 cursor 그대로
      */
     class RestoreOperation implements Operation {
         @Override
@@ -131,6 +135,7 @@ public class ModifyTable {
             if (!deletedRows.isEmpty()) {
                 Integer pop = deletedRows.pop();
                 table.add(pop, 'O');
+                if (cursor >= pop) return cursor + 1;
             }
             return cursor;
         }
