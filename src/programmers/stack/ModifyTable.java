@@ -16,22 +16,32 @@ public class ModifyTable {
 
     public String solution(int n, int k, String[] cmd) {
         int cursor = k;
-        final List<Character> table = initTable(n);
+        final LinkedList<Character> table = initTable(n);
         final Stack<Integer> deletedRows = new Stack<>();
         final CommandProcessor commandProcessor = new CommandProcessor();
         for (String commandStr : cmd) {
             Command command = new Command(commandStr);
             cursor = commandProcessor.proceed(command, cursor, table, deletedRows);
         }
-        return table.stream().map(Object::toString).collect(Collectors.joining());
+        final List<Character> answer = initAnswer(n);
+        deletedRows.forEach(row -> answer.set(row, 'X'));
+        return answer.stream().map(Object::toString).collect(Collectors.joining());
     }
 
-    public List<Character> initTable(int n) {
-        final List<Character> table = new ArrayList<>();
+    public LinkedList<Character> initTable(int n) {
+        final LinkedList<Character> table = new LinkedList<>();
         for (int i = 0; i < n; i++) {
             table.add('O');
         }
         return table;
+    }
+
+    public ArrayList<Character> initAnswer(int n) {
+        final ArrayList<Character> answer = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            answer.add('O');
+        }
+        return answer;
     }
 
     class Command {
@@ -63,30 +73,23 @@ public class ModifyTable {
             operations.put("Z", new RestoreOperation());
         }
 
-        public int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows) {
+        public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
             return operations.get(command.name).proceed(command, cursor, table, deletedRows);
         }
     }
 
     interface Operation {
-        int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows);
+        int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows);
     }
 
     /**
      * 1. 이동하려는 값 : offset = -(command.value)
-     * 2. 단, 중간에 삭제된 원소가 있으면 그 원소의 수만큼 offset의 절댓값 추가
-     * => for문을 돌아서 cursor가 지나간 원소들 중에 삭제된 원소가 있으면 offset의 절댓값을 증가시킨다.
-     * 3. offset + cursor > table.size() 이면 cursor = table.size() - 1
+     * 2. 단, offset + cursor < 0 이면 cursor = 0
      */
     class UpOperation implements Operation {
         @Override
-        public int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows) {
-            int offset = -(command.value);
-            for (int i = cursor; i >= cursor - command.value; i--) {
-                if (table.get(i) == 'X') {
-                    offset--;
-                }
-            }
+        public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
+            final int offset = -(command.value);
             return Math.max(cursor + offset, 0);
         }
     }
@@ -94,42 +97,27 @@ public class ModifyTable {
 
     /**
      * 1. 이동하려는 값 : offset = +(command.value)
-     * 2. 단, 중간에 삭제된 원소가 있으면 그 원소의 수만큼 offset의 절댓값 추가
-     * => for문을 돌아서 cursor가 지나간 원소들 중에 삭제된 원소가 있으면 offset의 절댓값을 증가시킨다.
-     * 3. offset + cursor > table.size() 이면 cursor = table.size() - 1
+     * 2. 단, offset + cursor >= table.size() 이면 cursor = table.size() - 1
      */
     class DownOperation implements Operation {
         @Override
-        public int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows) {
-            int offset = command.value;
-            for (int i = cursor; i <= cursor + command.value; i++) {
-                if (table.get(i) == 'X') {
-                    offset++;
-                }
-            }
+        public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
+            final int offset = command.value;
             return cursor + offset >= table.size() ? table.size() - 1 : cursor + offset;
         }
     }
 
     /**
-     * 1. cursor가 가리키는 원소의 값을 'X'로 변경
+     * 1. cursor가 가리키는 LinkedList의 원소를 삭제
      * 2. cursor의 값을 deletedRows에 push
-     * 3. cursor의 값을 1 증가한다.
-     * 4. cursor가 '삭제되지 않은' 마지막 원소를 가리키고 있으면 cursor = '삭제되지 않은' 마지막 원소의 인덱스 - 1
+     * (LinkedList 자료구조에서는 삭제되면 자동으로 앞으로 당겨지기 때문에 cursor의 값은 변경없음)
      */
     class DeleteOperation implements Operation {
         @Override
-        public int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows) {
-            int lastIndexOfNotDeleted = 0;
-            for (int i = table.size()-1; i >= 0; i--) {
-                if (table.get(i) == 'O') {
-                    lastIndexOfNotDeleted = i;
-                    break;
-                }
-            }
+        public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
             deletedRows.push(cursor);
-            table.set(cursor, 'X');
-            return cursor == lastIndexOfNotDeleted ? lastIndexOfNotDeleted - 1 : cursor + 1;
+            table.remove(cursor);
+            return cursor;
         }
     }
 
@@ -139,10 +127,10 @@ public class ModifyTable {
      */
     class RestoreOperation implements Operation {
         @Override
-        public int proceed(Command command, int cursor, List<Character> table, Stack<Integer> deletedRows) {
+        public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
             if (!deletedRows.isEmpty()) {
                 Integer pop = deletedRows.pop();
-                table.set(pop, 'O');
+                table.add(pop, 'O');
             }
             return cursor;
         }
