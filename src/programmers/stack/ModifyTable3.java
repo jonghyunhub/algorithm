@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+// https://school.programmers.co.kr/learn/courses/30/lessons/81303
 public class ModifyTable3 {
 
     public static void main(String[] args) {
