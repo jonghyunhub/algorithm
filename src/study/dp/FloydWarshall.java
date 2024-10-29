@@ -20,9 +20,16 @@ public class FloydWarshall {
             {0, inf, 7, 2, 0, 3},
             {0, inf, 3, 1, inf, 0}
     };
+
+    // 거쳐가는 최근 정점을 기록하는 배열
     static int[][] p = new int[6][6];
 
     public static void main(String[] args) {
+        floydWarshall(graph2);
+        printShortestPath(p);
+    }
+
+    public static void floydWarshall(int[][] graph) {
         int n = graph.length;
 
         for (int k = 1; k < n; k++) {
@@ -35,12 +42,9 @@ public class FloydWarshall {
                 }
             }
             System.out.println("--------------k: " + k + "---------------------");
-            printResult(p);
+            printResult(graph,p);
             System.out.println();
         }
-
-
-        printShortestPath(5, 3);
     }
 
     public static void printMatrix(int[][] matrix) {
@@ -65,25 +69,29 @@ public class FloydWarshall {
         System.out.print(value);
     }
 
-    private static void printResult(int[][] p) {
+    private static void printResult(int[][] graph, int[][] p) {
         System.out.println("--------------graph--------------------");
         printMatrix(graph);
         System.out.println("--------------p------------------------");
         printMatrix(p);
     }
 
-    private static void printShortestPath(int row, int column) {
-        System.out.print("path(" + row + "," + column +") : " + row + " -> ");
-        path(row,column);
-        System.out.println(column);
+    private static void printShortestPath(int[][] graph) {
+        for (int row = 1; row < graph.length; row++) {
+            for (int column = 1; column < graph.length; column++) {
+                System.out.print("path(" + row + "," + column + ") : " + row + " -> ");
+                path(graph, row, column);
+                System.out.println(column);
+            }
+        }
     }
 
-    private static void path(int row, int column) {
-        int value = p[row][column];
+    private static void path(int[][] graph ,int row, int column) {
+        int value = graph[row][column];
         if (value != 0) {
-            path(row, value);
+            path(graph, row, value);
             System.out.print(value + " -> ");
-            path(value, column);
+            path(graph, value, column);
         }
     }
 }
