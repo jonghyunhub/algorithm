@@ -17,10 +17,15 @@ public class FeatureDevelopment {
         int[] progresses2 = {95, 90, 99, 99, 80, 99};
         int[] speeds2 = {1, 1, 1, 1, 1, 1};
         FeatureDevelopment featureDevelopment = new FeatureDevelopment();
-        int[] solution = featureDevelopment.solution(progresses2, speeds2);
-        for (int i : solution) {
-            System.out.println("i = " + i);
+        int[] solution = featureDevelopment.solution(progresses1, speeds1);
+        System.out.print("[");
+        for (int i = 0; i< solution.length; i++) {
+            System.out.print(solution[i]);
+            if (i != solution.length - 1) {
+                System.out.print(", ");
+            }
         }
+        System.out.println("]");
     }
 
     public int[] solution(int[] progresses, int[] speeds) {
