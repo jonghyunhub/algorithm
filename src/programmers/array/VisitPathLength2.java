@@ -80,6 +80,7 @@ public class VisitPathLength2 {
         }
 
 
+        // hash 기반의 자료구조는 equals를 사용할때 hashCode를 사용함 => hashSet을 사용하므로 hashCode도 오버라이드
         public int hashCode() {
             int hash1 = Objects.hash(x1, y1, x2, y2);
             int hash2 = Objects.hash(x2, y2, x1, y1);
