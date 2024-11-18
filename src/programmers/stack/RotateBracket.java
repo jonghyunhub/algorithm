@@ -1,4 +1,5 @@
 package programmers.stack;
+import java.util.*;
 
 import java.util.Stack;
 
@@ -7,8 +8,8 @@ public class RotateBracket {
 
     public static void main(String[] args) {
         RotateBracket rotateBracket = new RotateBracket();
-        String input = "}}}";
-        System.out.println(rotateBracket.solution(input));
+        String input = "[](){}";
+        System.out.println(rotateBracket.solution2(input));
     }
 
     /**
@@ -76,6 +77,65 @@ public class RotateBracket {
         }
 
         return stack.isEmpty();
+    }
+
+
+    public int solution2(String s) {
+        Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new ArrayDeque<>();
+        Map<Character, Character> map = Map.of(
+                ')', '(',
+                ']', '[',
+                '}', '{'
+        );
+        int answer = 0;
+
+        // 회전을 위해 큐에 모든 원소 적재
+        for(char c : s.toCharArray())
+            queue.add(c);
+
+        // 회전하면서 올바른 문자열인지 검증
+        for(int i=0; i<s.length(); i++){
+            boolean isCorrect = isCorrectString(queue, stack, map);
+            if(isCorrect) answer++;
+            queue.add(queue.poll());
+        }
+
+        return answer;
+    }
+
+    private static boolean isCorrectString(Queue<Character> queue, Stack<Character> stack, Map<Character, Character> map) {
+        boolean isCorrect = true;
+        for(char c:queue.toArray(new Character[0])){
+            // 여는 괄호는 스택에 넣기
+            if(c == '[' || c == '(' || c == '{'){
+                stack.add(c);
+                continue;
+            }
+
+            // 닫는 괄호인데 스택이 비어있으면 잘못된 문자열 ex) {{{
+            if (stack.isEmpty()) {
+                isCorrect = false;
+                break;
+            }
+
+            // 쌍이 맞다면 스택에서 꺼내기
+            // 닫는 괄호는 쌍이 맞는지 확인
+            if(stack.peek() == map.get(c)){
+                stack.pop();
+                continue;
+            }
+
+            // 나머지 경우는 실패
+            isCorrect = false;
+            break;
+        }
+        // 순회를 완료했는데 스택이 비어있지 않으면 잘못된 문자열 ex) }}}
+        if(!stack.isEmpty()){
+            isCorrect = false;
+            while(!stack.isEmpty()) stack.pop();
+        }
+        return isCorrect;
     }
 
 
