@@ -11,9 +11,9 @@ public class StockPrice {
     public static void main(String[] args) {
         final StockPrice stockPrice = new StockPrice();
 //        final int[] prices = {1, 2, 3, 2, 3};
-//        final int[] prices = {1, 6, 9, 5, 3, 2, 7};
-        final int[] prices = {1,1,1,7,5,6};
-        final int[] result = stockPrice.solution2(prices);
+        final int[] prices = {1, 6, 9, 5, 3, 2, 7};
+//        final int[] prices = {1,1,1,7,5,6};
+        final int[] result = stockPrice.solution3(prices);
         System.out.println("result = " + Arrays.toString(result));
     }
 
@@ -72,5 +72,26 @@ public class StockPrice {
             this.index = index;
             this.value = value;
         }
+    }
+
+
+
+    public int[] solution3(int[] prices) {
+        Stack<Integer> stack = new Stack<>();
+        int[] answer = new int[prices.length];
+        for(int now=0; now < prices.length; now++){
+            while(!stack.isEmpty() && prices[stack.peek()] > prices[now]){
+                Integer pop = stack.pop();
+                answer[pop] = now-pop;
+            }
+            stack.push(now);
+        }
+
+        while(!stack.isEmpty()){
+            Integer pop = stack.pop();
+            answer[pop] = prices.length - 1 - pop;
+        }
+
+        return answer;
     }
 }
