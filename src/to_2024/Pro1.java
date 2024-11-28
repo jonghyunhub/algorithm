@@ -1,6 +1,4 @@
-package toss_2024;
-
-import java.util.*;
+package to_2024;
 
 public class Pro1 {
 
