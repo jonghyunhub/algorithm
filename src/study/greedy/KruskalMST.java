@@ -5,9 +5,8 @@ import java.util.*;
 public class KruskalMST {
 
     public static void main(String[] args) {
-        // figure 4.7 데이터
         int[] counts = new int[2];  // [vertex count, edge count]를 담을 배열
-        List<Edge> edges = initTestData(counts);
+        List<Edge> edges = initFigure4_7(counts);
         int countOfVertices = counts[0];  // 노드의 갯수(vertex)
         int countOfEdges = counts[1];  // 간선의 갯수
 
@@ -27,6 +26,7 @@ public class KruskalMST {
         printTree(root, "", true);
     }
 
+    // figure 4.7 데이터
     private static List<Edge> initFigure4_7(int[] counts) {
         List<Edge> edges = new ArrayList<>();
         counts[0] = 5;  // vertex count
@@ -63,13 +63,6 @@ public class KruskalMST {
         // 가중치 기준으로 오름차순 정렬
         Collections.sort(edges);
 
-        // 정렬 결과 확인
-        System.out.println("\n정렬된 간선 목록:");
-        for (Edge edge : edges) {
-            System.out.printf("(%d, %d) - weight: %d%n",
-                    edge.source, edge.destination, edge.weight);
-        }
-
         // F 집합 초기화
         Set<Edge> F = new HashSet<>();
 
@@ -79,16 +72,9 @@ public class KruskalMST {
             ds.makeSet(i);
         }
 
-        // 초기 상태 출력
-        System.out.println("\n초기 상태:");
-        printUArrayState(ds.universe, n);
-        printDisjointSetForest(ds, n, F);
-
-
         // 크루스칼 시작
         int edgesAdded = 0;
         int edgeIndex = 0;
-        int step = 1;
 
         while (edgesAdded < n - 1) {
             Edge e = edges.get(edgeIndex++);
@@ -97,39 +83,14 @@ public class KruskalMST {
 
             int p = ds.find(i);
             int q = ds.find(j);
-//
-            System.out.println("\n단계 " + step + ":");
-            System.out.printf("간선 (%d, %d) weight: %d 검사 중%n",
-                    e.source, e.destination, e.weight);
-//
 
             if (p != q) {
                 ds.merge(p, q);
                 F.add(e);
                 edgesAdded++;
-
-                System.out.println("\n병합 후 U 배열 상태:");
-                printUArrayState(ds.universe, n);
-                System.out.println("\n병합 후 트리 구조:");
-                printDisjointSetForest(ds, n, F);
-
-                System.out.println("\n현재까지의 MST 구조:");
-                if (!F.isEmpty()) {
-                    int root = F.iterator().next().source;
-                    TreeNode currentTree = buildMSTree(root, F, n);
-                    printTree(currentTree, "", true);
-                }
-            } else {
-                System.out.printf("find(%d)=%d, find(%d)=%d 이므로 사이클 형성으로 제외%n",
-                        i, p, j, q);
             }
-
-            step++;
-            //
-
         }
 
-        System.out.println("\n최종 MST 완성!");
         return F;
     }
 
@@ -277,60 +238,6 @@ public class KruskalMST {
             this.children = new ArrayList<>();
             this.edgeWeight = 0;
         }
-    }
-
-
-    // U 배열 상태 출력
-    private static void printUArrayState(DisjointSet.NodeType[] universe, int n) {
-        System.out.println("index:\tp.depth\tparent");
-        System.out.println("----------------------");
-        for (int i = 1; i <= n; i++) {
-            System.out.printf("%d:\t%d\t%d%n",
-                    i, universe[i].depth, universe[i].parent);
-        }
-    }
-
-    // 현재의 분리 집합 트리 구조 출력
-    private static void printDisjointSetForest(DisjointSet ds, int n, Set<Edge> F) {
-        // 각 노드의 루트와 자식들 찾기
-        Map<Integer, List<Integer>> forestMap = new HashMap<>();
-        for (int i = 1; i <= n; i++) {
-            int root = ds.find(i);
-            forestMap.computeIfAbsent(root, k -> new ArrayList<>()).add(i);
-        }
-
-        System.out.println("현재 분리 집합 트리들:");
-
-        // 각 트리를 TreeNode 형태로 변환하여 출력
-        for (int root : forestMap.keySet()) {
-            System.out.println("\n트리 " + root + ":");
-            TreeNode rootNode = buildDisjointSetTree(root, ds.universe, new boolean[n + 1], F);
-            printTree(rootNode, "", true);
-        }
-    }
-
-    // 분리 집합의 트리 노드 생성
-    private static TreeNode buildDisjointSetTree(int vertex, DisjointSet.NodeType[] universe, boolean[] visited,  Set<Edge> F) {
-        TreeNode node = new TreeNode(vertex);
-        visited[vertex] = true;
-
-        // 현재 노드를 부모로 가지는 모든 자식 노드 찾기
-        for (int i = 1; i < universe.length; i++) {
-            if (!visited[i] && universe[i].parent == vertex) {
-                TreeNode child = buildDisjointSetTree(i, universe, visited, F);
-                // 간선의 가중치 찾기
-                for (Edge e : F) {
-                    if ((e.source == vertex && e.destination == i) ||
-                            (e.source == i && e.destination == vertex)) {
-                        child.edgeWeight = e.weight;
-                        break;
-                    }
-                }
-                node.children.add(child);
-            }
-        }
-
-        return node;
     }
 
 }
