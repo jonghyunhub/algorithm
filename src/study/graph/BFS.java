@@ -58,10 +58,10 @@ public class BFS {
         needVisit.add(new Edge(start, 1)); // 시작점을 큐에 넣는다.
         while (!needVisit.isEmpty()){
             final Edge poll = needVisit.poll();
-            if(!visited.contains(poll)) visited.add(poll);
-            for (Edge edge : graph.get(poll.to)){
-                if(!visited.contains(edge) && !needVisit.contains(edge))
-                    needVisit.add(edge);
+            if(visited.contains(poll)) continue; // 이미 방문한 노드라면 스킵
+            visited.add(poll);
+            for (Edge edge : graph.get(poll.to)){ // 오른쪽 순회
+                needVisit.add(edge);
             }
         }
 
@@ -79,8 +79,7 @@ public class BFS {
 
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Edge edge = (Edge) o;
+            if (!(o instanceof Edge edge)) return false;
             return weight == edge.weight && Objects.equals(to, edge.to);
         }
 
