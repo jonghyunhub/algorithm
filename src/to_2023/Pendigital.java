@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// 토스 1번 문제
+// 1번 문제
 // 재귀함수로 1 부터 N까지 숫자가 포함된 멋쟁이 팬디지털 리스트를 만든다.(내림차순으로 생성)
 // 큰 것부터 하나씩 contains를 해본다.
 // 있으면 그거 리턴
