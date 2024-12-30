@@ -20,7 +20,8 @@ public class NetworkMarketing {
         }
     }
 
-    // 트리를 순회하면서 이익을 계산
+    // 트리를 순회하면서 이익을 계산 => 이렇게 계산하면 상납금이 뭉개지는 경우가 존재
+    // ex) 250, 350 => 2 + 3 = 5원 상납 / 250 + 350 = 600 => 6원상납
     public int[] solution1(String[] enroll, String[] referral, String[] seller, int[] amount) {
         final Map<String, List<String>> sellerTree = new HashMap<>(); // 판매원들 부모,자식 트리
         final Map<String, List<Integer>> sellerAmount = new HashMap<>(); // 각 판매원이 직접 판매한 값 매핑
