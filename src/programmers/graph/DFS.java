@@ -24,7 +24,7 @@ public class DFS {
                 {"5", "6"}
         };
         DFS dfs = new DFS();
-        String[] answers = dfs.solutionByStack(n2, start2, graph2);
+        String[] answers = dfs.solutionByRecursive(n2, start2, graph2);
         System.out.print("[");
         for (int i = 0; i < answers.length; i++) {
             System.out.print(answers[i]);
@@ -48,9 +48,10 @@ public class DFS {
      */
     public String[] solutionByStack(int n, String start, String[][] graph) {
         final Stack<String> stack = new Stack<>();
+        final List<String> visited = new ArrayList<>();
         final Map<String, List<String>> graphList = new HashMap<>(n);
-        Set<String> visited = new HashSet<>();
 
+        // 그래프 인접 리스트 초기화
         for (String[] arr : graph) {
             List<String> orDefault = graphList.getOrDefault(arr[0], new ArrayList<>());
             orDefault.add(arr[1]);
@@ -61,7 +62,8 @@ public class DFS {
 
         while (!stack.isEmpty()) {
             String now = stack.pop();
-            visited.add(now); // 방문 노드를 Set을 사용하여 표현하면 자동으로 중복이 제거됨
+            // 현재 노드를 방문하지 않았다면 노드에 추가
+            if(!visited.contains(now)) visited.add(now);
             for (String node : graphList.getOrDefault(now, new ArrayList<>())) {
                 stack.add(node);
             }
@@ -70,7 +72,28 @@ public class DFS {
         return visited.stream().toArray(String[]::new);
     }
 
-    public String[] solutionByRecursive() {
-        return null;
+    public String[] solutionByRecursive(int n, String start, String[][] graph) {
+        final List<String> visited = new ArrayList<>();
+        final Map<String, List<String>> graphList = new HashMap<>(n);
+
+        // 그래프 인접 리스트 초기화
+        for (String[] arr : graph) {
+            List<String> orDefault = graphList.getOrDefault(arr[0], new ArrayList<>());
+            orDefault.add(arr[1]);
+            graphList.put(arr[0], orDefault);
+        }
+
+        recursiveDfs(start, graphList, visited);
+        return visited.stream().toArray(String[]::new);
+    }
+
+    public void recursiveDfs(String node, Map<String, List<String>> graph, List<String> visited) {
+        // 현재 노드를 방문하지 않은 경우에만 방문 처리
+        if(!visited.contains(node)) visited.add(node);
+        // 없는 경우에는 조기 종료 해야하지만 여기서는 getOrDefault로 빈 list를 가져와서 처리
+        List<String> adjacencyNodes = graph.getOrDefault(node, new ArrayList<>());
+        for (String nextNode : adjacencyNodes) {
+            recursiveDfs(nextNode, graph, visited);
+        }
     }
 }
