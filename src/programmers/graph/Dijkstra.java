@@ -76,9 +76,28 @@ public class Dijkstra {
             }
         }
 
+        printChannels(dists);
+
         return dists.stream().mapToInt(dist -> dist.value).toArray();
     }
 
+    private static void printChannels(List<Dist> dists) {
+        for (int index = 0; index < dists.size(); index++) {
+            System.out.print(index + ": ");
+            printPrevNode(dists.get(index), index, dists);
+            System.out.println();
+        }
+    }
+
+    private static void printPrevNode(Dist dist, int index, List<Dist> dists) {
+        if (dist.prevNode == index) {
+            System.out.print(index + " ");
+            return;
+        }
+        int prevNode = dist.prevNode;
+        printPrevNode(dists.get(prevNode), prevNode, dists);
+        System.out.print(index + " ");
+    }
 
     static class Vertex implements Comparable<Vertex> {
         int index;
