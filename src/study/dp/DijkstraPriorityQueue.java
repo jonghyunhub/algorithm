@@ -71,7 +71,7 @@ public class DijkstraPriorityQueue {
         @Override
         public int compareTo(Vertex other) {
             return Integer.compare(this.distance, other.distance);
-        }
+        } // 오름차순정렬
     }
 
 }
