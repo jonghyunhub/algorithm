@@ -11,14 +11,14 @@ public class ConverterDecimalToBinaryNumber {
         System.out.println("solution = " + solution);
     }
 
-    public String solution(int num){
+    public String solution(int num) {
         final Stack<String> stack = new Stack<>();
-        while(num >0){
+        while (num > 0) {
             stack.push(Integer.toString(num % 2));
             num /= 2;
         }
         StringBuilder stringBuilder = new StringBuilder();
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             stringBuilder.append(stack.pop());
         }
         return stringBuilder.toString();
@@ -26,13 +26,13 @@ public class ConverterDecimalToBinaryNumber {
 
     public String solution2(int decimal) {
         Stack<Integer> stack = new Stack<>();
-        while(decimal > 0) {
+        while (decimal > 0) {
             Integer remain = decimal % 2;
             stack.add(remain);
             decimal = decimal / 2;
         }
         StringBuilder sb = new StringBuilder();
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
         return sb.toString();

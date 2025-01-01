@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -24,15 +25,15 @@ public class Main {
         });
 
         for (Item item : items) {
-            if(item.weight <= weightLimit) {
+            if (item.weight <= weightLimit) {
                 weightLimit -= item.weight;
                 answerValue += item.value;
                 continue;
             }
 
-            if(weightLimit > 0) {
+            if (weightLimit > 0) {
                 double fraction = (double) weightLimit / item.weight;
-                answerValue +=  (item.value * fraction);
+                answerValue += (item.value * fraction);
                 break;
             }
         }

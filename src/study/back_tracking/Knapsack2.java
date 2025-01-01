@@ -26,6 +26,29 @@ public class Knapsack2 {
         this.treeStructure = new StringBuilder();
     }
 
+    public static void main(String[] args) {
+        Item[] items1 = {
+                new Item(0, 0, 0),      // dummy item
+                new Item(1, 2, 40),
+                new Item(2, 5, 30),
+                new Item(3, 10, 50),
+                new Item(4, 5, 10)
+        };
+        int capacity1 = 16;
+
+        Item[] items2 = {
+                new Item(0, 0, 0),     // dummy item
+                new Item(1, 8, 100),   // p/w = 12.5
+                new Item(2, 12, 180),  // p/w = 15
+                new Item(3, 10, 120),  // p/w = 12
+                new Item(4, 5, 60)     // p/w = 12
+        };
+        int capacity2 = 20;
+
+        Knapsack2 ks = new Knapsack2(items2, capacity2);
+        ks.solve();
+    }
+
     private String getTreePrefix(int level, boolean isLast) {
         StringBuilder prefix = new StringBuilder();
         for (int i = 0; i < level - 1; i++) {
@@ -56,7 +79,6 @@ public class Knapsack2 {
                     newBestPrefix, currentProfit);
         }
     }
-
 
     private boolean promising(int i, boolean isLast) {
         // 무게 초과로 실패하는 경우
@@ -128,6 +150,7 @@ public class Knapsack2 {
 
         level--;
     }
+
     public void solve() {
         System.out.println("=== 0-1 배낭 문제 해결 시작 ===");
         System.out.printf("배낭 용량: %d\n", capacity);
@@ -160,6 +183,7 @@ public class Knapsack2 {
         System.out.printf("\n총 무게: %d\n", totalWeight);
         System.out.printf("총 이익: $%d\n", totalProfit);
     }
+
     static class Item {
         private int id;
         private int weight;
@@ -170,40 +194,28 @@ public class Knapsack2 {
             this.id = id;
             this.weight = weight;
             this.profit = profit;
-            this.ratio = (float)profit / weight;
+            this.ratio = (float) profit / weight;
         }
 
-        public int getId() { return id; }
-        public int getWeight() { return weight; }
-        public int getProfit() { return profit; }
-        public float getRatio() { return ratio; }
+        public int getId() {
+            return id;
+        }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public int getProfit() {
+            return profit;
+        }
+
+        public float getRatio() {
+            return ratio;
+        }
 
         @Override
         public String toString() {
             return String.format("Item %d: 무게=%d, 가치=%d, p/w=%.2f", id, weight, profit, ratio);
         }
-    }
-
-    public static void main(String[] args) {
-        Item[] items1 = {
-                new Item(0, 0, 0),      // dummy item
-                new Item(1, 2, 40),
-                new Item(2, 5, 30),
-                new Item(3, 10, 50),
-                new Item(4, 5, 10)
-        };
-        int capacity1 = 16;
-
-        Item[] items2 = {
-                new Item(0, 0, 0),     // dummy item
-                new Item(1, 8, 100),   // p/w = 12.5
-                new Item(2, 12, 180),  // p/w = 15
-                new Item(3, 10, 120),  // p/w = 12
-                new Item(4, 5, 60)     // p/w = 12
-        };
-        int capacity2 = 20;
-
-        Knapsack2 ks = new Knapsack2(items2, capacity2);
-        ks.solve();
     }
 }

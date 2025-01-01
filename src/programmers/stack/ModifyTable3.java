@@ -56,12 +56,6 @@ public class ModifyTable3 {
     }
 
     public static abstract class Command {
-        public abstract int proceed(Integer cursor,
-                                    int inputSize,
-                                    List<Integer> upIdxs,
-                                    List<Integer> downIdxs,
-                                    Stack<Integer> deletedRow);
-
         public static Command initCommand(String commandStr) {
             String[] splitCommand = commandStr.split(" ");
             return switch (splitCommand[0]) {
@@ -76,6 +70,12 @@ public class ModifyTable3 {
         public static List<Command> initCommands(String cmd[]) {
             return Arrays.stream(cmd).map(Command::initCommand).collect(Collectors.toList());
         }
+
+        public abstract int proceed(Integer cursor,
+                                    int inputSize,
+                                    List<Integer> upIdxs,
+                                    List<Integer> downIdxs,
+                                    Stack<Integer> deletedRow);
     }
 
     public static class UpCommand extends Command {
@@ -126,7 +126,7 @@ public class ModifyTable3 {
             upIdxs.set(downIdxs.get(cursor), upIdxs.get(cursor));
             downIdxs.set(upIdxs.get(cursor), downIdxs.get(cursor));
             deletedRow.push(cursor);
-            return inputSize < downIdxs.get(cursor) ?  upIdxs.get(cursor) : downIdxs.get(cursor);
+            return inputSize < downIdxs.get(cursor) ? upIdxs.get(cursor) : downIdxs.get(cursor);
         }
     }
 

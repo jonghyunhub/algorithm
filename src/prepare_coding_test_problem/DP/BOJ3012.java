@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class BOJ3012 {
+    static final long mod = 100000;
     static int n;
     static String s;
     static long[][] d = new long[200][200];
-    static final long mod = 100000;
     static char[] open = {'(', '{', '['};
     static char[] close = {')', '}', ']'};
 

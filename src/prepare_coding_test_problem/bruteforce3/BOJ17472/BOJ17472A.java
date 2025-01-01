@@ -26,6 +26,7 @@ public class BOJ17472A {
     static ArrayList<Edge> edges = new ArrayList<>();
     static int ans = -1;
     static int[][] a;
+    static boolean[] check;
 
     static void bfs(int x, int y) {
         groups += 1;
@@ -49,8 +50,6 @@ public class BOJ17472A {
             }
         }
     }
-
-    static boolean[] check;
 
     static void dfs(int x) {
         for (int y = 1; y <= groups; y++) {

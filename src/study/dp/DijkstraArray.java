@@ -8,23 +8,23 @@ public class DijkstraArray {
 
     public static void main(String[] args) {
         final int[][] figure4_8_graph = new int[][]{
-                {0,0,0,0,0,0},
-                { 0,0, 7, 4, 6, 1},
-                { 0,INF, 0, INF, INF, INF},
-                { 0,INF, 2, 0, 5, INF},
-                { 0,INF, 3, INF, 0, INF},
-                { 0,INF, INF, INF, 1, 0}
+                {0, 0, 0, 0, 0, 0},
+                {0, 0, 7, 4, 6, 1},
+                {0, INF, 0, INF, INF, INF},
+                {0, INF, 2, 0, 5, INF},
+                {0, INF, 3, INF, 0, INF},
+                {0, INF, INF, INF, 1, 0}
         }; // 0번 정점은 사용하지 않음 (1번부터 사용)
 
 
         final int[][] testData = new int[][]{
-                { 0, 0,0,0,0,0,0},  // 0번 정점의 연결
-                { 0,0, 2, 5, 1, INF, INF},      // 1번 정점의 연결
-                { 0,2, 0, 3, 2, INF, INF},      // 2번 정점의 연결
-                { 0,5, 3, 0, 3, 1, 5},          // 3번 정점의 연결
-                { 0,1, 2, 3, 0, 1, INF},        // 4번 정점의 연결
-                { 0,INF, INF, 1, 1, 0, 2},      // 5번 정점의 연결
-                { 0, INF, INF, 5, INF, 2, 0}     // 6번 정점의 연결
+                {0, 0, 0, 0, 0, 0, 0},  // 0번 정점의 연결
+                {0, 0, 2, 5, 1, INF, INF},      // 1번 정점의 연결
+                {0, 2, 0, 3, 2, INF, INF},      // 2번 정점의 연결
+                {0, 5, 3, 0, 3, 1, 5},          // 3번 정점의 연결
+                {0, 1, 2, 3, 0, 1, INF},        // 4번 정점의 연결
+                {0, INF, INF, 1, 1, 0, 2},      // 5번 정점의 연결
+                {0, INF, INF, 5, INF, 2, 0}     // 6번 정점의 연결
         }; // 0번 정점은 사용하지 않음
 
         int n = figure4_8_graph.length; // 정점 개수
@@ -45,21 +45,6 @@ public class DijkstraArray {
         }
     }
 
-    static class Edge {
-        int from;
-        int to;
-
-        public Edge(int from, int to) {
-            this.from = from;
-            this.to = to;
-        }
-
-        @Override
-        public String toString() {
-            return "(" + from + "," + to + ")";
-        }
-    }
-
     public static void dijkstra(int n, int[][] W, Set<Edge> F, int[] touch) {
         int i, vnear;
         int[] length = new int[n];
@@ -73,7 +58,7 @@ public class DijkstraArray {
         }
 
         // n-2번 반복 (0번과 1번 제외한 모든 정점에 대해)
-        for (int count = 0; count < n-2; count++) {
+        for (int count = 0; count < n - 2; count++) {
             int min = INF;
             vnear = -1;
 
@@ -97,7 +82,7 @@ public class DijkstraArray {
             System.out.println("vnear: " + vnear);
             System.out.print("length: [");
 
-            for (int t=0; t<length.length; t++) {
+            for (int t = 0; t < length.length; t++) {
                 System.out.print(length[t]);
                 if (t != length.length - 1) {
                     System.out.print(", ");
@@ -106,7 +91,7 @@ public class DijkstraArray {
             System.out.println("]");
 
             System.out.print("touch: [");
-            for (int t=0; t<touch.length; t++) {
+            for (int t = 0; t < touch.length; t++) {
                 System.out.print(touch[t]);
                 if (t != touch.length - 1) {
                     System.out.print(", ");
@@ -129,5 +114,20 @@ public class DijkstraArray {
         // 현재 정점의 이전 정점으로 재귀 호출
         printShortestPath(touch, touch[current]);
         System.out.print("-> " + current + " ");
+    }
+
+    static class Edge {
+        int from;
+        int to;
+
+        public Edge(int from, int to) {
+            this.from = from;
+            this.to = to;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + from + "," + to + ")";
+        }
     }
 }

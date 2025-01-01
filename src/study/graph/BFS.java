@@ -46,7 +46,7 @@ public class BFS {
         );
 
         Queue<Edge> bfs = bfs(graph, "A");
-        while (!bfs.isEmpty()){
+        while (!bfs.isEmpty()) {
             System.out.print(bfs.poll().to + " ");
         }
     }
@@ -56,11 +56,11 @@ public class BFS {
         final Queue<Edge> needVisit = new ArrayDeque<>();
 
         needVisit.add(new Edge(start, 1)); // 시작점을 큐에 넣는다.
-        while (!needVisit.isEmpty()){
+        while (!needVisit.isEmpty()) {
             final Edge poll = needVisit.poll();
-            if(visited.contains(poll)) continue; // 이미 방문한 노드라면 스킵
+            if (visited.contains(poll)) continue; // 이미 방문한 노드라면 스킵
             visited.add(poll);
-            for (Edge edge : graph.get(poll.to)){ // 오른쪽 순회
+            for (Edge edge : graph.get(poll.to)) { // 오른쪽 순회
                 needVisit.add(edge);
             }
         }

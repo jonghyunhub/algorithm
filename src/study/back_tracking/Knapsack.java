@@ -22,6 +22,32 @@ public class Knapsack {
         this.currentProfit = 0;
     }
 
+    public static void main(String[] args) {
+        // 인덱스 0은 사용하지 않음
+        //example 5.6
+        Item[] items1 = {
+                new Item(0, 0, 0),      // dummy item
+                new Item(1, 2, 40),
+                new Item(2, 5, 30),
+                new Item(3, 10, 50),
+                new Item(4, 5, 10)
+        };
+        int capacity1 = 16;
+
+        // 자작데이터
+        Item[] items2 = {
+                new Item(0, 0, 0),     // dummy item
+                new Item(1, 8, 100),   // p/w = 12.5
+                new Item(2, 12, 180),  // p/w = 15
+                new Item(3, 10, 120),  // p/w = 12
+                new Item(4, 5, 60)     // p/w = 12
+        };
+        int capacity2 = 20;
+
+        Knapsack ks = new Knapsack(items2, capacity2);
+        ks.solve();
+    }
+
     private boolean promising(int i) {
         int j, k;
         int totalWeight;
@@ -124,31 +150,5 @@ public class Knapsack {
         public String toString() {
             return String.format("Item %d: 무게=%d, 가치=%d", id, weight, profit);
         }
-    }
-
-    public static void main(String[] args) {
-        // 인덱스 0은 사용하지 않음
-        //example 5.6
-        Item[] items1 = {
-                new Item(0, 0, 0),      // dummy item
-                new Item(1, 2, 40),
-                new Item(2, 5, 30),
-                new Item(3, 10, 50),
-                new Item(4, 5, 10)
-        };
-        int capacity1 = 16;
-
-        // 자작데이터
-        Item[] items2 = {
-                new Item(0, 0, 0),     // dummy item
-                new Item(1, 8, 100),   // p/w = 12.5
-                new Item(2, 12, 180),  // p/w = 15
-                new Item(3, 10, 120),  // p/w = 12
-                new Item(4, 5, 60)     // p/w = 12
-        };
-        int capacity2 = 20;
-
-        Knapsack ks = new Knapsack(items2, capacity2);
-        ks.solve();
     }
 }

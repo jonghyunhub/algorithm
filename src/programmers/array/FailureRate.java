@@ -10,7 +10,7 @@ public class FailureRate {
 
     public static void main(String[] args) {
         FailureRate failureRate = new FailureRate();
-        int[] stage1 = {4,4,4,4,4};
+        int[] stage1 = {4, 4, 4, 4, 4};
         int[] solution = failureRate.solution(5, stage1);
         System.out.println(Arrays.toString(solution));
     }
@@ -37,7 +37,7 @@ public class FailureRate {
                     countOfNowStage++;
             }
             // 스테이지에 도달한 유저가 없는 경우
-            if(countOfNowStage == 0){
+            if (countOfNowStage == 0) {
                 answer.add(Map.entry(numOfStage, 0.0));
                 continue;
             }

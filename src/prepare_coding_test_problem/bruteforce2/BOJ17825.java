@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class BOJ17825 {
     static final int n = 33;
+    static final int t = 10;
     static int[] score = {
             0, 2, 4, 6, 8,
             10, 13, 16, 19, 25,
@@ -13,7 +14,6 @@ public class BOJ17825 {
             32, 34, 36, 38, 30,
             35, 40, 0
     };
-    static final int t = 10;
     static int[] dice = new int[t];
     static int[][] a = new int[n][];
 

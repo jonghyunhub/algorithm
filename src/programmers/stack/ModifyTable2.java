@@ -39,8 +39,6 @@ public class ModifyTable2 {
     }
 
     public static abstract class Command {
-        abstract int proceed(int cursor, ArrayList<Character> table, Stack<Integer> deletedRows);
-
         public static Command initCommand(String commandStr) {
             String[] splitCommand = commandStr.split(" ");
             return switch (splitCommand[0]) {
@@ -55,6 +53,8 @@ public class ModifyTable2 {
         public static List<Command> initCommands(String cmd[]) {
             return Arrays.stream(cmd).map(Command::initCommand).collect(Collectors.toList());
         }
+
+        abstract int proceed(int cursor, ArrayList<Character> table, Stack<Integer> deletedRows);
     }
 
 

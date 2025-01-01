@@ -13,7 +13,7 @@ public class ProperBracket {
                 stack.push(c);
                 continue;
             }
-            if(c == ')' && !stack.isEmpty() && stack.peek() == '(') {
+            if (c == ')' && !stack.isEmpty() && stack.peek() == '(') {
                 stack.pop();
                 continue;
             }
@@ -21,7 +21,7 @@ public class ProperBracket {
             return answer;
         }
 
-        if(!stack.isEmpty())
+        if (!stack.isEmpty())
             answer = false;
 
         return answer;

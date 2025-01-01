@@ -42,14 +42,14 @@ public class FloydWarshall {
                 }
             }
             System.out.println("--------------k: " + k + "---------------------");
-            printResult(graph,p);
+            printResult(graph, p);
             System.out.println();
         }
     }
 
     public static void printMatrix(int[][] matrix) {
         int length = matrix.length;
-        for (int row=1; row < length; row++) {
+        for (int row = 1; row < length; row++) {
             System.out.print("[");
             for (int column = 1; column < length; column++) {
                 printValue(matrix[row][column]);
@@ -86,7 +86,7 @@ public class FloydWarshall {
         }
     }
 
-    private static void path(int[][] graph ,int row, int column) {
+    private static void path(int[][] graph, int row, int column) {
         int value = graph[row][column];
         if (value != 0) {
             path(graph, row, value);

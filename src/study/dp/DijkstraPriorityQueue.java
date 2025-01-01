@@ -1,9 +1,11 @@
 package study.dp;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
 public class DijkstraPriorityQueue {
-    static final int inf = Integer.MAX_VALUE-100;
+    static final int inf = Integer.MAX_VALUE - 100;
 
     public static void main(String[] args) {
         final int[][] graph1 = {
@@ -30,6 +32,7 @@ public class DijkstraPriorityQueue {
      * 4. 현재 거리 배열의 값과 (현재 정점의 거리 값 + 연결된 정점의 거리 값)을 비교하여 작은 값을 넣는다.
      * 5. 거리 배열의 값이 변경되면 그 인덱스와 거리 값을 우선순위 큐에 넣는다.
      * 6. 3~5의 과정을 큐가 비어 있을 때까지 반복한다.
+     *
      * @param graph
      * @param start
      * @return
@@ -39,15 +42,15 @@ public class DijkstraPriorityQueue {
         final PriorityQueue<Vertex> queue = new PriorityQueue<>();
         queue.add(new Vertex(start, 0));
 
-        while (!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             final Vertex poll = queue.poll();
             final int nowIndex = poll.index;
             final int nowDistance = poll.distance;
 
-            for (int i=0; i< graph[nowIndex].length; i++){
-                if(dist.get(i) > nowDistance + graph[nowIndex][i]){
-                    dist.set(i,nowDistance + graph[nowIndex][i]); // 4. 현재 거리 배열의 값과 (현재 정점의 거리 값 + 연결된 정점의 거리 값)을 비교하여 작은 값을 넣는다.
-                    if(graph[nowIndex][i] != 0)
+            for (int i = 0; i < graph[nowIndex].length; i++) {
+                if (dist.get(i) > nowDistance + graph[nowIndex][i]) {
+                    dist.set(i, nowDistance + graph[nowIndex][i]); // 4. 현재 거리 배열의 값과 (현재 정점의 거리 값 + 연결된 정점의 거리 값)을 비교하여 작은 값을 넣는다.
+                    if (graph[nowIndex][i] != 0)
                         queue.add(new Vertex(i, nowDistance + graph[nowIndex][i])); // 5. 거리 배열의 값이 변경되면 그 인덱스와 거리 값을 우선순위 큐에 넣는다.
                 }
             }
@@ -56,7 +59,7 @@ public class DijkstraPriorityQueue {
         return dist.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    public static class Vertex implements Comparable<Vertex>{
+    public static class Vertex implements Comparable<Vertex> {
         int index;
         int distance;
 

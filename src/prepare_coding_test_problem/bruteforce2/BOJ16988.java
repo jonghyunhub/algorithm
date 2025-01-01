@@ -5,10 +5,10 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class BOJ16988 {
-    static int n, m;
-    static int[][] a;
     static final int[] dx = {0, 0, 1, -1};
     static final int[] dy = {1, -1, 0, 0};
+    static int n, m;
+    static int[][] a;
 
     static int bfs() {
         boolean[][] check = new boolean[n][m];

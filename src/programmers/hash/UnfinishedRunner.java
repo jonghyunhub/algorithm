@@ -32,17 +32,17 @@ public class UnfinishedRunner {
 
     public String solution(String[] participant, String[] completion) {
         final Map<String, List<String>> map = new HashMap<>();
-        for(int i=0; i<completion.length; i++){
-            if(map.containsKey(completion[i])){
+        for (int i = 0; i < completion.length; i++) {
+            if (map.containsKey(completion[i])) {
                 map.get(completion[i]).add(completion[i]);
                 continue;
             }
             map.put(completion[i], new ArrayList<>(Arrays.asList(completion[i])));
         }
 
-        for(String now : participant){
+        for (String now : participant) {
             // keys에 해당하는 완주자 이름이 없는 경우
-            if(!map.containsKey(now)){
+            if (!map.containsKey(now)) {
                 return now;
             }
             // 중복되는 경우 keys에 해당하는 완주자 이름이 있으나, 리스트에 값이 있는지 여부를 확인해야함
@@ -50,7 +50,7 @@ public class UnfinishedRunner {
             if (values.isEmpty()) {
                 return now;
             }
-            values.remove(values.size()-1);
+            values.remove(values.size() - 1);
         }
 
         return "";

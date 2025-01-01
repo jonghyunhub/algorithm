@@ -11,7 +11,7 @@ public class ModifyTable {
         final int n = 8;
         final int k = 2;
         final String[] cmd1 = {"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z"};
-        final String[] cmd2 ={"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z", "U 1", "C"};
+        final String[] cmd2 = {"D 2", "C", "U 3", "C", "D 4", "C", "U 2", "Z", "Z", "U 1", "C"};
         System.out.println(modifyTable.solution(n, k, cmd2));
     }
 
@@ -45,6 +45,10 @@ public class ModifyTable {
         return answer;
     }
 
+    interface Operation {
+        int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows);
+    }
+
     class Command {
         private final String name;
         private final int value;
@@ -63,7 +67,6 @@ public class ModifyTable {
         }
     }
 
-
     class CommandProcessor {
         private final Map<String, Operation> operations = new HashMap<>();
 
@@ -77,10 +80,6 @@ public class ModifyTable {
         public int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows) {
             return operations.get(command.name).proceed(command, cursor, table, deletedRows);
         }
-    }
-
-    interface Operation {
-        int proceed(Command command, int cursor, LinkedList<Character> table, Stack<Integer> deletedRows);
     }
 
     /**

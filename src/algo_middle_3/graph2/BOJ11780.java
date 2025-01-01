@@ -5,9 +5,9 @@ import java.util.Queue;
 import java.util.Scanner;
 
 public class BOJ11780 {
+    static final int inf = 1000000000;
     static int[][] a;
     static int[][] next;
-    static final int inf = 1000000000;
 
     static void path(int x, int y) {
         if (next[x][y] == -1) {

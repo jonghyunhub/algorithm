@@ -27,13 +27,13 @@ public class NQueen {
     }
 
     public static void dfs(int n, int currentRow, List<Integer> currentCandidate, List<List<Integer>> result) {
-        if(currentRow == n){
+        if (currentRow == n) {
             result.add(currentCandidate);
             return;
         }
 
         for (Integer currentColumn : currentCandidate) {
-            if(isPromising(currentRow, currentColumn, currentCandidate)){
+            if (isPromising(currentRow, currentColumn, currentCandidate)) {
                 currentCandidate.add(currentColumn);
                 dfs(n, currentRow + 1, currentCandidate, result);
                 currentCandidate.remove(currentCandidate.size() - 1);
@@ -43,7 +43,7 @@ public class NQueen {
 
     public static boolean isPromising(int currentRow, int currentColumn, List<Integer> currentCandidate) {
         for (int i = 0; i < currentRow; i++) {
-            if(currentCandidate.get(i) == currentColumn || Math.abs(currentRow - i) == Math.abs(currentColumn - currentCandidate.get(i))){
+            if (currentCandidate.get(i) == currentColumn || Math.abs(currentRow - i) == Math.abs(currentColumn - currentCandidate.get(i))) {
                 return false;
             }
         }

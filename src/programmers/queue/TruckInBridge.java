@@ -1,6 +1,9 @@
 package programmers.queue;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/42583
 public class TruckInBridge {
@@ -18,7 +21,7 @@ public class TruckInBridge {
 
         // 대기 트럭 초기화
         Queue<Truck> waitTrucks = new ArrayDeque();
-        for(int i=0; i<truck_weights.length; i++){
+        for (int i = 0; i < truck_weights.length; i++) {
             waitTrucks.add(new Truck(truck_weights[i]));
         }
 
@@ -27,9 +30,9 @@ public class TruckInBridge {
         int weightsOfTrucksInBridge = 0;
 
         // 다리에 들어갈 수 있는 트럭과 다리 위의 트럭이 없을 때까지 반복
-        while(!(waitTrucks.isEmpty() && trucksInBridge.isEmpty())){
+        while (!(waitTrucks.isEmpty() && trucksInBridge.isEmpty())) {
             // 다리에서 나올 수 있는 트럭이 있으면 다리에서 트럭을 꺼낸다.
-            while(!trucksInBridge.isEmpty() && trucksInBridge.peek().timeInBridge >= bridge_length){
+            while (!trucksInBridge.isEmpty() && trucksInBridge.peek().timeInBridge >= bridge_length) {
                 Truck poll = trucksInBridge.poll();
                 trucksOutOfBridge.add(poll);
                 weightsOfTrucksInBridge -= poll.weight;
@@ -37,8 +40,8 @@ public class TruckInBridge {
 
             // 다리에 들어갈 수 있는 트럭이 있으면 다리에 트럭을 넣는다.
             // 다리에 트럭이 들어가는건 1초에 한대씩 가능
-            if(!waitTrucks.isEmpty()
-                    && weightsOfTrucksInBridge + waitTrucks.peek().weight <= weight){
+            if (!waitTrucks.isEmpty()
+                    && weightsOfTrucksInBridge + waitTrucks.peek().weight <= weight) {
                 Truck poll = waitTrucks.poll();
                 trucksInBridge.add(poll);
                 weightsOfTrucksInBridge += poll.weight;
@@ -56,7 +59,7 @@ public class TruckInBridge {
         int weight;
         int timeInBridge = 0;
 
-        public Truck(int weight){
+        public Truck(int weight) {
             this.weight = weight;
         }
     }

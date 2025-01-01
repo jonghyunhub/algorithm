@@ -1,13 +1,13 @@
 package boj.dp;
 
-import java.util.*;
+import java.util.Scanner;
 
 // https://www.acmicpc.net/problem/11726
 public class BOJ11726 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        long[] memo = new long[n+1];
+        long[] memo = new long[n + 1];
         long answer = solutionWithLoop(n, memo);
         System.out.println(answer);
         sc.close();
@@ -27,8 +27,8 @@ public class BOJ11726 {
         if (n <= 2) return n;
         memo[1] = 1;
         memo[2] = 2;
-        for(int i=3; i<=n; i++)
-            memo[i] = (memo[i-1] + memo[i-2]) % 10007;
+        for (int i = 3; i <= n; i++)
+            memo[i] = (memo[i - 1] + memo[i - 2]) % 10007;
         return memo[n];
     }
 }

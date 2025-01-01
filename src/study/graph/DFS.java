@@ -45,7 +45,7 @@ public class DFS {
         );
 
         Queue<Edge> dfs = dfs(graph, "A");
-        while (!dfs.isEmpty()){
+        while (!dfs.isEmpty()) {
             System.out.print(dfs.poll().to + " ");
         }
     }
@@ -54,16 +54,16 @@ public class DFS {
         final Queue<Edge> visited = new ArrayDeque<>();
         final Stack<Edge> needVisit = new Stack<>();
         needVisit.add(new Edge(start, 1)); // 시작점을 스택에 넣는다.
-        while (!needVisit.isEmpty()){
+        while (!needVisit.isEmpty()) {
             final Edge now = needVisit.pop();
-            if(visited.contains(now)) continue; // 이미 방문한 노드라면 스킵
+            if (visited.contains(now)) continue; // 이미 방문한 노드라면 스킵
             visited.add(now);
 //            for(Edge edge : graph.get(now.to)){ // 오른쪽 순회
 //                needVisit.push(edge);
 //            }
             List<Edge> list = new ArrayList<>(graph.get(now.to));
             Collections.reverse(list);
-            for(Edge edge : list){ // 왼쪽 순회
+            for (Edge edge : list) { // 왼쪽 순회
                 needVisit.push(edge);
             }
         }
@@ -79,13 +79,13 @@ public class DFS {
             this.weight = weight;
         }
 
-        public int hashCode(){
+        public int hashCode() {
             return Objects.hash(to, weight);
         }
 
-        public boolean equals(Object o){
-            if(o == this) return true;
-            if(! (o instanceof Edge edge)) return false;
+        public boolean equals(Object o) {
+            if (o == this) return true;
+            if (!(o instanceof Edge edge)) return false;
             return weight == edge.weight && Objects.equals(to, edge.to);
         }
     }

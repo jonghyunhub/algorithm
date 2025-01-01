@@ -121,13 +121,13 @@ public class NetworkMarketing {
         }
 
         // sellerAmount를 순회하면서 각 판매원이 판매한 금액이 발생할 때 마다 계산
-        for(String sellerName : sellerAmount.keySet()){
+        for (String sellerName : sellerAmount.keySet()) {
             List<Integer> amounts = sellerAmount.get(sellerName);
-            for (int nowAmount: amounts){
+            for (int nowAmount : amounts) {
                 String nowSeller = sellerName;
                 int nowProfit = nowAmount;
                 // 루트 부모가 나올때까지 반복해서 부모들의 이익을 계산
-                while(true){
+                while (true) {
                     int parentProfit = (int) (nowProfit * 0.1);
                     int nowAmountProfit = nowProfit - parentProfit;
                     // 현재 이익 계산
@@ -135,7 +135,7 @@ public class NetworkMarketing {
                     // [부모 상납 종료 조건]
                     // 루트를 만나면 계산 종료
                     // 상납할 금액이 10원 미만인 경우 => 9원이면 부모한테 0.9원 상납 => 0원됨
-                    if(sellerMap.get(nowSeller).equals("-") || nowProfit < 10){
+                    if (sellerMap.get(nowSeller).equals("-") || nowProfit < 10) {
                         break;
                     }
                     nowSeller = sellerMap.get(nowSeller);
@@ -146,7 +146,7 @@ public class NetworkMarketing {
 
         // 마지막 정답 처리
         for (int i = 0; i < enroll.length; i++) {
-            answer.add(sellerProfits.getOrDefault(enroll[i],0));
+            answer.add(sellerProfits.getOrDefault(enroll[i], 0));
         }
 
         return answer.stream().mapToInt(i -> i).toArray();

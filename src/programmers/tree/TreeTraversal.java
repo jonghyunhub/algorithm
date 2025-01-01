@@ -9,7 +9,7 @@ public class TreeTraversal {
         }
     }
 
-    public static String[] solution(int[] nodes){
+    public static String[] solution(int[] nodes) {
         String[] result = new String[3];
         result[0] = preOrder(nodes, 0);
         result[1] = inOrder(nodes, 0);
@@ -17,29 +17,29 @@ public class TreeTraversal {
         return result;
     }
 
-    private static String preOrder(int[] nodes, int index){
+    private static String preOrder(int[] nodes, int index) {
         // index가 범위를 벗어나면 빈 문자열 반환
-        if(index >= nodes.length) return "";
+        if (index >= nodes.length) return "";
 
         return nodes[index] + " " +
                 preOrder(nodes, index * 2 + 1) +
                 preOrder(nodes, index * 2 + 2);
     }
 
-    private static String inOrder(int[] nodes, int index){
+    private static String inOrder(int[] nodes, int index) {
         // index가 범위를 벗어나면 빈 문자열 반환
-        if(index >= nodes.length) return "";
+        if (index >= nodes.length) return "";
 
-        return inOrder(nodes, index*2 +1) +
+        return inOrder(nodes, index * 2 + 1) +
                 nodes[index] + " " +
-                inOrder(nodes, index*2 + 2);
+                inOrder(nodes, index * 2 + 2);
     }
 
-    private static String postOrder(int[] nodes, int index){
-        if(index >= nodes.length) return "";
+    private static String postOrder(int[] nodes, int index) {
+        if (index >= nodes.length) return "";
 
-        return postOrder(nodes, index*2 + 1) +
-                postOrder(nodes, index*2 + 2) +
+        return postOrder(nodes, index * 2 + 1) +
+                postOrder(nodes, index * 2 + 2) +
                 nodes[index] + " ";
     }
 }

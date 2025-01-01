@@ -19,7 +19,7 @@ public class FeatureDevelopment {
         FeatureDevelopment featureDevelopment = new FeatureDevelopment();
         int[] solution = featureDevelopment.solution(progresses1, speeds1);
         System.out.print("[");
-        for (int i = 0; i< solution.length; i++) {
+        for (int i = 0; i < solution.length; i++) {
             System.out.print(solution[i]);
             if (i != solution.length - 1) {
                 System.out.print(", ");

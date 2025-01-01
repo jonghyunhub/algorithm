@@ -63,7 +63,7 @@ public class DFS {
         while (!stack.isEmpty()) {
             String now = stack.pop();
             // 현재 노드를 방문하지 않았다면 노드에 추가
-            if(!visited.contains(now)) visited.add(now);
+            if (!visited.contains(now)) visited.add(now);
             for (String node : graphList.getOrDefault(now, new ArrayList<>())) {
                 stack.add(node);
             }
@@ -89,7 +89,7 @@ public class DFS {
 
     public void recursiveDfs(String node, Map<String, List<String>> graph, List<String> visited) {
         // 현재 노드를 방문하지 않은 경우에만 방문 처리
-        if(!visited.contains(node)) visited.add(node);
+        if (!visited.contains(node)) visited.add(node);
         // 없는 경우에는 조기 종료 해야하지만 여기서는 getOrDefault로 빈 list를 가져와서 처리
         List<String> adjacencyNodes = graph.getOrDefault(node, new ArrayList<>());
         for (String nextNode : adjacencyNodes) {

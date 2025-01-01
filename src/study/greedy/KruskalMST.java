@@ -172,16 +172,6 @@ public class KruskalMST {
     }
 
     static class DisjointSet {
-        static class NodeType {
-            int parent;
-            int depth;
-
-            NodeType() {
-                parent = 0;
-                depth = 0;
-            }
-        }
-
         NodeType[] universe; // U 배열
 
         public DisjointSet(int n) {
@@ -215,7 +205,6 @@ public class KruskalMST {
             }
         }
 
-
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
@@ -225,6 +214,16 @@ public class KruskalMST {
                         i, universe[i].parent, universe[i].depth));
             }
             return sb.toString();
+        }
+
+        static class NodeType {
+            int parent;
+            int depth;
+
+            NodeType() {
+                parent = 0;
+                depth = 0;
+            }
         }
     }
 

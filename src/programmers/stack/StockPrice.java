@@ -64,6 +64,25 @@ public class StockPrice {
         return answer;
     }
 
+    public int[] solution3(int[] prices) {
+        Stack<Integer> stack = new Stack<>();
+        int[] answer = new int[prices.length];
+        for (int now = 0; now < prices.length; now++) {
+            while (!stack.isEmpty() && prices[stack.peek()] > prices[now]) {
+                Integer pop = stack.pop();
+                answer[pop] = now - pop;
+            }
+            stack.push(now);
+        }
+
+        while (!stack.isEmpty()) {
+            Integer pop = stack.pop();
+            answer[pop] = prices.length - 1 - pop;
+        }
+
+        return answer;
+    }
+
     static class Price {
         int index;
         int value;
@@ -72,26 +91,5 @@ public class StockPrice {
             this.index = index;
             this.value = value;
         }
-    }
-
-
-
-    public int[] solution3(int[] prices) {
-        Stack<Integer> stack = new Stack<>();
-        int[] answer = new int[prices.length];
-        for(int now=0; now < prices.length; now++){
-            while(!stack.isEmpty() && prices[stack.peek()] > prices[now]){
-                Integer pop = stack.pop();
-                answer[pop] = now-pop;
-            }
-            stack.push(now);
-        }
-
-        while(!stack.isEmpty()){
-            Integer pop = stack.pop();
-            answer[pop] = prices.length - 1 - pop;
-        }
-
-        return answer;
     }
 }

@@ -86,6 +86,14 @@ public class VisitPathLength {
         private final int x;
         private final int y;
 
+        public Coordinate(int x, int y) {
+            if (x > 5 || x < -5 || y > 5 || y < -5) {
+                throw new IllegalArgumentException();
+            }
+            this.x = x;
+            this.y = y;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -97,14 +105,6 @@ public class VisitPathLength {
         @Override
         public int hashCode() {
             return Objects.hash(x, y);
-        }
-
-        public Coordinate(int x, int y) {
-            if (x > 5 || x < -5 || y > 5 || y < -5) {
-                throw new IllegalArgumentException();
-            }
-            this.x = x;
-            this.y = y;
         }
 
         public Coordinate nextCommand(char operand) {

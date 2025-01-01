@@ -1,6 +1,7 @@
 package programmers.hash;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 // 알고리즘 책 hash 문제 1번
 public class FindingTargetSumUsingTwoNumbers {
@@ -16,7 +17,7 @@ public class FindingTargetSumUsingTwoNumbers {
 
         final int[] numbers3 = new int[100000];
         for (int i = 1; i <= numbers3.length; i++) {
-            numbers3[i-1] = i;
+            numbers3[i - 1] = i;
         }
         final int target3 = 1;
 
@@ -35,9 +36,9 @@ public class FindingTargetSumUsingTwoNumbers {
     // 완전 탐색 방식
     public boolean solution1(int[] numbers, int target) {
         boolean answer = false;
-        for(int i=0; i<numbers.length; i++){
-            for (int j=i+1; j<numbers.length; j++){
-                if(numbers[i] + numbers[j] == target){
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = i + 1; j < numbers.length; j++) {
+                if (numbers[i] + numbers[j] == target) {
                     answer = true;
                     break;
                 }
@@ -51,14 +52,14 @@ public class FindingTargetSumUsingTwoNumbers {
     public boolean solution2(int[] numbers, int target) {
         boolean answer = false;
         final Map<Integer, Integer> map = new HashMap<>();
-        for(int i=0; i<numbers.length; i++){
-            map.put(numbers[i],i); // key: numbers[i], value: index
+        for (int i = 0; i < numbers.length; i++) {
+            map.put(numbers[i], i); // key: numbers[i], value: index
         }
-        for(int now=0; now<numbers.length; now++){
+        for (int now = 0; now < numbers.length; now++) {
             int find = target - numbers[now];
-            if(map.containsKey(find)){
+            if (map.containsKey(find)) {
                 Integer index = map.get(find);
-                if(index != now){
+                if (index != now) {
                     answer = true;
                     break;
                 }

@@ -6,7 +6,7 @@ public class LIS {
 
     public static void main(String[] args) {
         int[] arr1 = {1, 4, 2, 3, 1, 5, 7, 3};
-        int[] arr2 = {3,2,1};
+        int[] arr2 = {3, 2, 1};
         int[] arr3 = {1, 2, 3};
         int[] arr4 = {1, 1, 1};
         int[] arr5 = {10, 20, 10, 30, 20, 50};

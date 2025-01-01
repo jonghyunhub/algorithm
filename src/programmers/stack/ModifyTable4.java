@@ -14,6 +14,60 @@ public class ModifyTable4 {
         System.out.println(modifyTable.solution(n, k, cmd4));
     }
 
+    public String solution(int n, int k, String[] cmd) {
+        final Stack<Node> deleted = new Stack<>();
+        LinkedList linkedList = new LinkedList(n);
+
+        // 처음에 커서의 위치 이동
+        Node cursor = linkedList.searchNext(k, linkedList.head.next);
+
+        for (String commandStr : cmd) {
+            if (commandStr.charAt(0) == 'U') {
+                String[] s = commandStr.split(" ");
+                int move = Integer.valueOf(s[1]);
+                cursor = linkedList.searchPrev(move, cursor);
+                continue;
+            }
+            if (commandStr.charAt(0) == 'D') {
+                String[] s = commandStr.split(" ");
+                int move = Integer.valueOf(s[1]);
+                cursor = linkedList.searchNext(move, cursor);
+                continue;
+            }
+            if (commandStr.equals("C")) {
+                Node node = linkedList.deleteNow(cursor);
+                deleted.push(cursor);
+                cursor = node;
+                continue;
+            }
+            if (commandStr.equals("Z")) {
+                Node pop = deleted.pop();
+                if (pop.next != null) {
+                    pop.next.prev = pop;
+                }
+                if (pop.prev != null) {
+                    pop.prev.next = pop;
+                }
+                linkedList.size++;
+            }
+        }
+        // 0부터 n-1까지 순회하면서 포함되어있으면 O, 없으면 X로 표시
+        StringBuilder answer = new StringBuilder();
+        int index = 0;
+        Node search = linkedList.head.next;
+        while (index < n) {
+            if (search != null && search.data == index) {
+                answer.append("O");
+                search = search.next;
+            } else {
+                answer.append("X");
+            }
+            index++;
+        }
+
+        return answer.toString();
+    }
+
     public static class LinkedList {
         Node head;
         int size;
@@ -94,59 +148,5 @@ public class ModifyTable4 {
             this.prev = prev;
             this.next = next;
         }
-    }
-
-    public String solution(int n, int k, String[] cmd) {
-        final Stack<Node> deleted = new Stack<>();
-        LinkedList linkedList = new LinkedList(n);
-
-        // 처음에 커서의 위치 이동
-        Node cursor = linkedList.searchNext(k, linkedList.head.next);
-
-        for (String commandStr : cmd) {
-            if (commandStr.charAt(0) == 'U') {
-                String[] s = commandStr.split(" ");
-                int move = Integer.valueOf(s[1]);
-                cursor = linkedList.searchPrev(move, cursor);
-                continue;
-            }
-            if (commandStr.charAt(0) == 'D') {
-                String[] s = commandStr.split(" ");
-                int move = Integer.valueOf(s[1]);
-                cursor = linkedList.searchNext(move, cursor);
-                continue;
-            }
-            if (commandStr.equals("C")) {
-                Node node = linkedList.deleteNow(cursor);
-                deleted.push(cursor);
-                cursor = node;
-                continue;
-            }
-            if (commandStr.equals("Z")) {
-                Node pop = deleted.pop();
-                if(pop.next!=null){
-                    pop.next.prev = pop;
-                }
-                if(pop.prev!=null){
-                    pop.prev.next = pop;
-                }
-                linkedList.size++;
-            }
-        }
-        // 0부터 n-1까지 순회하면서 포함되어있으면 O, 없으면 X로 표시
-        StringBuilder answer = new StringBuilder();
-        int index = 0;
-        Node search = linkedList.head.next;
-        while (index < n) {
-            if (search != null && search.data == index) {
-                answer.append("O");
-                search = search.next;
-            } else {
-                answer.append("X");
-            }
-            index++;
-        }
-
-        return answer.toString();
     }
 }

@@ -1,6 +1,7 @@
 package boj.greedy;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 // https://www.acmicpc.net/problem/11399
 public class Boj11399 {
@@ -20,8 +21,8 @@ public class Boj11399 {
         int[] sorted = Arrays.stream(withdrawTimes).sorted().toArray(); // 오름차순 정렬
         int[] withdrawTimePerPerson = new int[n];
         withdrawTimePerPerson[0] = sorted[0];
-        for (int i=1; i<n; i++) {
-            withdrawTimePerPerson[i] = sorted[i] + withdrawTimePerPerson[i-1];
+        for (int i = 1; i < n; i++) {
+            withdrawTimePerPerson[i] = sorted[i] + withdrawTimePerPerson[i - 1];
         }
         return Arrays.stream(withdrawTimePerPerson).sum();
     }

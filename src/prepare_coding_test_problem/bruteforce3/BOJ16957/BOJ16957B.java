@@ -3,9 +3,9 @@ package prepare_coding_test_problem.bruteforce3.BOJ16957;
 import java.util.Scanner;
 
 public class BOJ16957B {
-    static int[] parent;
     static final int[] dx = {0, 0, 1, -1, 1, 1, -1, -1};
     static final int[] dy = {1, -1, 0, 0, 1, -1, 1, -1};
+    static int[] parent;
 
     static int go(int x) {
         if (parent[x] == x) {

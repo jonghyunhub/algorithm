@@ -1,6 +1,7 @@
 package boj.graph;
 
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class BOJ1238 {
     private final static int INF = 1000000;
@@ -10,10 +11,10 @@ public class BOJ1238 {
         final int n = sc.nextInt();
         final int m = sc.nextInt();
         final int x = sc.nextInt();
-        final int[][] graph = new int[n+1][n+1];
-        for (int i = 1; i <=n; i++) {
-            for (int j = 1; j <=n; j++) {
-                if(i != j) graph[i][j] = INF;
+        final int[][] graph = new int[n + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i != j) graph[i][j] = INF;
             }
         }
         for (int i = 0; i < m; i++) {
@@ -25,10 +26,10 @@ public class BOJ1238 {
 
         int answer = 0;
         int[] xToI = dijsktra(graph, x); // x -> i로 가는건 한번만 계산
-        for(int i=1; i< graph.length; i++){
-            if(i==x) continue;
+        for (int i = 1; i < graph.length; i++) {
+            if (i == x) continue;
             int[] iToX = dijsktra(graph, i);
-            if(answer < iToX[x] + xToI[i])
+            if (answer < iToX[x] + xToI[i])
                 answer = iToX[x] + xToI[i];
         }
         System.out.println(answer);
@@ -37,7 +38,7 @@ public class BOJ1238 {
 
     public static int[] dijsktra(final int[][] graph, final int start) {
         final int[] dists = new int[graph.length];
-        for (int i=1; i< graph.length; i++) dists[i] = INF;
+        for (int i = 1; i < graph.length; i++) dists[i] = INF;
         dists[start] = 0;
         final PriorityQueue<Node> queue = new PriorityQueue<>();
         queue.add(new Node(start, 0)); // 시작점 노드 넣고 시작
@@ -45,9 +46,9 @@ public class BOJ1238 {
             final Node now = queue.poll();
             final int nowIndex = now.index;
             final int nowDist = now.dist;
-            for(int i=1; i< graph.length; i++){ // 사용편의를 위해 1부터 시작
-                if(dists[i] > nowDist +  graph[nowIndex][i]){
-                    dists[i] = nowDist +  graph[nowIndex][i];
+            for (int i = 1; i < graph.length; i++) { // 사용편의를 위해 1부터 시작
+                if (dists[i] > nowDist + graph[nowIndex][i]) {
+                    dists[i] = nowDist + graph[nowIndex][i];
                     queue.add(new Node(i, dists[i]));
                 }
             }

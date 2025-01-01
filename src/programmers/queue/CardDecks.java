@@ -1,6 +1,9 @@
 package programmers.queue;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 // https://school.programmers.co.kr/learn/courses/30/lessons/159994
 public class CardDecks {

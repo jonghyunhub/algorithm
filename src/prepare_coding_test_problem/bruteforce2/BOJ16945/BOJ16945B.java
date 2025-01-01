@@ -14,19 +14,21 @@ public class BOJ16945B {
             {6, 7, 2, 1, 5, 9, 8, 3, 4},
             {8, 3, 4, 1, 5, 9, 6, 7, 2}
     };
+
     static int diff(int[] a, int[] d) {
         int ans = 0;
-        for (int i=0; i<n*n; i++) {
+        for (int i = 0; i < n * n; i++) {
             int temp = a[i] - d[i];
             if (temp < 0) temp = -temp;
             ans += temp;
         }
         return ans;
     }
+
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-        int[] a = new int[n*n];
-        for (int i=0; i<n*n; i++) {
+        int[] a = new int[n * n];
+        for (int i = 0; i < n * n; i++) {
             a[i] = sc.nextInt();
         }
         int ans = -1;

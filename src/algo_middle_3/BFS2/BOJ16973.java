@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BOJ16973 {
+    static final int[] dx = {1, -1, 0, 0};
+    static final int[] dy = {0, 0, 1, -1};
     static int[][] a;
     static int[][] d;
     static int[][] s;
-    static final int[] dx = {1, -1, 0, 0};
-    static final int[] dy = {0, 0, 1, -1};
 
     static int sum(int x1, int y1, int x2, int y2) {
         return s[x2][y2] - s[x1 - 1][y2] - s[x2][y1 - 1] + s[x1 - 1][y1 - 1];
