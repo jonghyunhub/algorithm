@@ -2,6 +2,7 @@ package boj.graph;
 
 import java.util.*;
 
+// https://www.acmicpc.net/problem/1520
 public class BOJ1520 {
     static int[][] dp;  // 메모이제이션을 위한 배열
     static int[][] graph;
