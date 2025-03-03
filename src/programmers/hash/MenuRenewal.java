@@ -15,7 +15,7 @@ public class MenuRenewal {
         final String[] order3 = {"XYZ", "XWY", "WXA"};
         final int[] course3 = {2, 3, 4};
         final MenuRenewal menuRenewal = new MenuRenewal();
-        final String[] solution = menuRenewal.solution(order3, course3);
+        final String[] solution = menuRenewal.solution2(order3, course3);
         System.out.print("[");
         for (int i = 0; i < solution.length; i++) {
             System.out.print(solution[i]);
@@ -66,9 +66,9 @@ public class MenuRenewal {
                 // 문자열의 길이와 같지 않으면 스킵
                 if (orderCom.length() != courseNum) continue;
                 // 최댓값과 일치하지 않으면 스킵
-                if(orderMap.get(orderCom) != maxCnt) continue;
+                if (orderMap.get(orderCom) != maxCnt) continue;
                 // 최댓값이 1 이하면 스킵
-                if(maxCnt <= 1) continue;
+                if (maxCnt <= 1) continue;
                 answer.add(orderCom);
             }
         }
@@ -105,5 +105,15 @@ public class MenuRenewal {
             // 백트래킹: 현재 문자 선택 취소 (StringBuilder에서 마지막 문자 제거)
             currentStr.setLength(currentStr.length() - 1);
         }
+    }
+
+    public String[] solution2(String[] orders, int[] course) {
+        final List<String> list = new ArrayList<>();
+        for (String order : orders) {
+            char[] charArray = order.toCharArray();
+            Arrays.sort(charArray);
+            list.add(new String(charArray));
+        }
+        return list.stream().toArray(String[]::new);
     }
 }
