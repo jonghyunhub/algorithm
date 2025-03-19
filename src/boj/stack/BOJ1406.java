@@ -1,4 +1,4 @@
-package boj;
+package boj.stack;
 
 import java.io.*;
 import java.util.Stack;
