@@ -14,7 +14,7 @@ public class Programmers258712 {
         String[] gifts2 = {"alessandro brad", "alessandro joy", "alessandro conan", "david alessandro", "alessandro david"};
         String[] friends3 = {"a", "b", "c"};
         String[] gifts3 = {"a b", "b a", "c a", "a c", "a c", "c a"};
-        programmers258712.solution(friends2, gifts2);
+        programmers258712.solution(friends1, gifts1);
     }
 
     public int solution(String[] friends, String[] gifts) {
@@ -24,9 +24,8 @@ public class Programmers258712 {
             String[] split = gift.split(" ");
             String sentMan = split[0];
             String receiveMan = split[1];
-            Map<String, Integer> sentMap = giftsSentTo.getOrDefault(sentMan, new HashMap<>());
+            Map<String, Integer> sentMap = giftsSentTo.computeIfAbsent(sentMan, k -> new HashMap<>());
             sentMap.put(receiveMan, sentMap.getOrDefault(receiveMan, 0) + 1);
-            giftsSentTo.put(sentMan, sentMap);
         }
         // 선물 지수 계산
         Map<String ,Integer> giftScores = new HashMap<>();
