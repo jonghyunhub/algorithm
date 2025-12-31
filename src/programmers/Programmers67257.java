@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-//https://school.programmers.co.kr/learn/courses/30/lessons/67257 - 수식 최대화 
+//https://school.programmers.co.kr/learn/courses/30/lessons/67257 - 수식 최대화
 public class Programmers67257 {
     public static void main(String[] args) {
         Programmers67257 programmers67257 = new Programmers67257();
