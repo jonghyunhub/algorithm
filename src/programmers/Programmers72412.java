@@ -12,20 +12,20 @@ public class Programmers72412 {
         System.out.println(Arrays.toString(solution));
     }
 
-    static Map<String, Set<Integer>> languageIndex = new HashMap<>();
-    static Map<String, Set<Integer>> jobIndex = new HashMap<>();
-    static Map<String, Set<Integer>> levelIndex = new HashMap<>();
-    static Map<String, Set<Integer>> foodIndex = new HashMap<>();
-    static List<String> rows = new ArrayList<>();
+    Map<String, List<Integer>> scoreMap = new HashMap<>();
 
     public int[] solution(String[] info, String[] query) {
         List<Integer> answer = new ArrayList<>();
-        // info - 언어, 직군, 연차, 음식으로 이루어져 있고 해당 값으로 탐색 필요
-        // idea : 각 데이터를 어떻게 저장하고 빠르게 검색할 것인가? => 각 쿼리 키워드 기준으로 rows의 index를 저장한 map(일종의 index) 를 통해 탐색
+
+        // 1. 데이터 추가
         for (String row : info) {
             add(row);
         }
 
+        // 2. 정렬 (이진 탐색 준비)
+        postProcess();
+
+        // 3. 쿼리 처리
         for(String tmp: query){
             String[] split = tmp.split(" and ");
             String language = split[0];
@@ -42,58 +42,62 @@ public class Programmers72412 {
     }
 
     public void add(String row) {
-        int rowId = rows.size();
-        rows.add(row);
-
         String[] split = row.split(" ");
         String language = split[0];
         String job = split[1];
         String level = split[2];
         String food = split[3];
+        int score = Integer.parseInt(split[4]);
 
-        languageIndex.computeIfAbsent(language, k -> new HashSet<>()).add(rowId);
-        jobIndex.computeIfAbsent(job, k -> new HashSet<>()).add(rowId);
-        levelIndex.computeIfAbsent(level, k -> new HashSet<>()).add(rowId);
-        foodIndex.computeIfAbsent(food, k -> new HashSet<>()).add(rowId);
+        // 가능한 모든 조합의 키를 생성 (16가지)
+        String[] languages = {language, "-"};
+        String[] jobs = {job, "-"};
+        String[] levels = {level, "-"};
+        String[] foods = {food, "-"};
+
+        for (String l : languages) {
+            for (String j : jobs) {
+                for (String lv : levels) {
+                    for (String f : foods) {
+                        String key = l + "-" + j + "-" + lv + "-" + f;
+                        scoreMap.computeIfAbsent(key, k -> new ArrayList<>()).add(score);
+                    }
+                }
+            }
+        }
     }
 
+    public void postProcess() {
+        for (List<Integer> scores : scoreMap.values()) {
+            Collections.sort(scores);
+        }
+    }
 
     public int query(String language, String job, String level, String food, int score) {
-        Set<Integer> result = null;
+        String key = language + "-" + job + "-" + level + "-" + food;
+        List<Integer> scores = scoreMap.get(key);
 
-        if (!language.equals("-")) {
-            result = new HashSet<>(languageIndex.getOrDefault(language, Set.of()));
-        }
-        if (!job.equals("-")) {
-            Set<Integer> jobs = jobIndex.getOrDefault(job, Set.of());
-            result = result == null ? new HashSet<>(jobs) : intersect(result, jobs);
-        }
-        if (!level.equals("-")) {
-            Set<Integer> levelSet = levelIndex.getOrDefault(level, Set.of());
-            result = result == null ? new HashSet<>(levelSet) : intersect(result, levelSet);
-        }
-        if (!food.equals("-")) {
-            Set<Integer> foodSet = foodIndex.getOrDefault(food, Set.of());
-            result = result == null ? new HashSet<>(foodSet) : intersect(result, foodSet);
+        if (scores == null) {
+            return 0;
         }
 
-        if (result == null) {
-            Set<Integer> tmp = new HashSet<>();
-            for(int i=0; i<rows.size(); i++) tmp.add(i);
-            result = tmp;
-        }
-
-        return (int) result
-                .stream()
-                .filter(i -> {
-                    String origin = rows.get(i);
-                    int targetScore = Integer.parseInt(origin.split(" ")[4]);
-                    return targetScore >= score;
-                }).count();
+        return countGreaterOrEqual(scores, score);
     }
 
-    private Set<Integer> intersect(Set<Integer> set1, Set<Integer> set2) {
-        set1.retainAll(set2);
-        return set1;
+    private int countGreaterOrEqual(List<Integer> scores, int target) {
+        // 이진 탐색: target 이상인 첫 번째 위치 찾기
+        int left = 0;
+        int right = scores.size();
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (scores.get(mid) >= target) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return scores.size() - left;
     }
 }
